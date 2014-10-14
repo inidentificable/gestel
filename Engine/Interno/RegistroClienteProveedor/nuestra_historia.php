@@ -14,6 +14,7 @@
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-panels.min.js"></script>
 		<script src="js/init.js"></script>
+	
 		<noscript>
 			<link rel="stylesheet" href="css/skel-noscript.css" />
 			<link rel="stylesheet" href="css/style.css" />
@@ -40,10 +41,10 @@
 									  </br>
 La permanente  preocupación por la calidad de nuestro servicio junto a la gran dedicación y  profesionalismo de nuestro equipo. Nuestra experiencia en el rubro es el valor  agregado de nuestro negocio, sabemos elegir la mejor solución para nuestros  clientes entregando rentabilidad a todas nuestras transacciones como objetivo  principal.<br><br>
 Calidad de  servicio, seriedad y confianza son los valores que priman en nuestro servicio,  buscamos la transparencia hacia los propietarios que desean vender o dar en arriendo  sus propiedades, nos tomamos el tiempo de analizar las distintas variables que  pueden dar valor a su inmueble.<br><br>
-Nuestra selecta  clientela ha sido, es y será nuestra principal preocupación y aliciente para  seguir perfeccionándonos día a día.<br>
-										<br>
-								  </p>
-							  </div>
+Nuestra selecta  clientela ha sido, es y será nuestra principal preocupación y aliciente para  seguir perfeccionándonos día a día.</p><br>
+								  <p>Nuestro Organigrama se distribuye de la siguiente manera:</p>
+									<p align="center"><img src="images/thumb_organigrama.png"/> </p>
+								</div>
 							</section>
 						</div>
 					</div>

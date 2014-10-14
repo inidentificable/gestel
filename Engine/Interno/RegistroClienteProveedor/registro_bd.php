@@ -56,11 +56,11 @@ if($_REQUEST['ingresar2'])
     
 	$hora=hora();
 	
-	$sql="INSERT INTO usuario SET rut='".$_REQUEST['frm_rut']."',usuario='".$_REQUEST['frm_usuario']."',nombre_user='".$_REQUEST['frm_nombre']."'apellido_user='".$_REQUEST['frm_apellido']."',meil='".$_REQUEST['frm_meil']."',fecha='".fecha_bd($fecha)."'clave='".$_REQUEST['frm_clave']."',clave2=".$_REQUEST['frm_clave2']."'tipo_usuario='".$_REQUEST['frm_tipo_usua'];
+	$sql="INSERT INTO cliente SET rut_clipro='".$_REQUEST['frm_rutclipro']."',nom_clipro='".$_REQUEST['frm_nomclipro']."'ape_clipro='".$_REQUEST['frm_apeclipro']."',sexo_clipro='".$_REQUEST['select_sexcli']."'estado_clipro='".$_REQUEST['select_estacli']."'usuario='".$_REQUEST['frm_usuario']."'clave='".$_REQUEST['frm_clave']."',clave2=".$_REQUEST['frm_clave2']."',fecha_clipro='".fecha_bd($fecha);
 	
 	$resultado=mysql_query($sql);
 	
-	header("Location:ver_perfil.php");
+	header("Location:ver_cliproveedor.php");
     exit;
 	
 }
