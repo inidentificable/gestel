@@ -35,15 +35,17 @@
 						<div class="12u">
 							<section>
 								<div class="post">
-									<h2 align="center">Nuestra Historia </h2>
-									<p>&nbsp; &nbsp;<strong>GESTEL</strong>  tiene 5 años de presencia en el mercado y cuenta con la experiencia de promover  propiedades de personas y empresas. Cuenta con una variada oferta de  propiedades, las cuales van desde terrenos (parcelas de agrado), casas,  departamentos, oficinas, bodegas, etc…<br>
-									  </br>
-La permanente  preocupación por la calidad de nuestro servicio junto a la gran dedicación y  profesionalismo de nuestro equipo. Nuestra experiencia en el rubro es el valor  agregado de nuestro negocio, sabemos elegir la mejor solución para nuestros  clientes entregando rentabilidad a todas nuestras transacciones como objetivo  principal.<br><br>
-Calidad de  servicio, seriedad y confianza son los valores que priman en nuestro servicio,  buscamos la transparencia hacia los propietarios que desean vender o dar en arriendo  sus propiedades, nos tomamos el tiempo de analizar las distintas variables que  pueden dar valor a su inmueble.<br><br>
-Nuestra selecta  clientela ha sido, es y será nuestra principal preocupación y aliciente para  seguir perfeccionándonos día a día.<br>
-										<br>
-								  </p>
-							  </div>
+									<h2 align="center">Nuestra Misión. </h2>
+								  <p>&nbsp;&nbsp;Nuestra Misión es  proveer Servicios Inmobiliarios con altos estándares de calidad, soluciones a  medida, serias, flexibles y oportunas. Nuestros sólidos principios éticos,  fuerte compromiso, honestidad, eficacia y responsabilidad, nos han guiado desde  el año 2009. Queremos ser una empresa guiada por valores donde la honestidad y  el respeto, por las personas y los compromisos, sean la base esencial de  nuestras acciones. </p>
+									<hr>
+									<h2 align="center">Nuestra Visión. </h2> 
+									<p>&nbsp;&nbsp;Ser reconocidos como una empresa  líder en el mercado de inversiones, de<strong> calidad y calidez </strong>a  través de nuestro rubro inmobiliario. </p>
+									<br>
+									<hr>
+									<h2 align="center">Nuestros Valores. </h2> 
+									  <br>
+								    </p>
+								</div>
 							</section>
 						</div>
 					</div>

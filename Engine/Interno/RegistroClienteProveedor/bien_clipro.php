@@ -36,14 +36,9 @@
 				<div class="container" align="center">
 					<table width="29%" border="1" align="center">
                                         <tr>
-                                          <td width="47%"><p><a href="ver_inmuebles.php"><img src="images/ico08.png" alt="" width="173" height="213"></a></p></td>
-                                          <td width="53%"><p><a href="ver_cliproveedor.php"><img src="images/ico09.png" alt="" width="173" height="213" border="0"></a></p></td>
-										  <td><a href="#"><img src="images/ico11.png" width="173" height="213"></a></td>
-                                        </tr>
-                                        <tr>
-                                          <td><p><a href="#"><img src="images/ico12.png" width="173" height="213"></a></p></td>
-										  <td><p><a href="#"><img src="images/ico10.png" width="173" height="213"></a></p></td>
-										  <td>&nbsp;</td>
+                                          <td width="47%"><p><img src="images/ico15.png" alt="Ver Mi Inmueble" width="163" height="183"></p></td>
+                                          <td width="53%"><p><a href="ver_cliproveedor.php"></a></p></td>
+										  <td><a href="#"></a></td>
                                         </tr>
                   </table>
 				</div>
