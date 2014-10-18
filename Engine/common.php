@@ -1,4 +1,4 @@
-<?php if (!defined('SITE')) exit('No direct script access allowed');
+<?php if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.gestel.cl');
 
 // this is a little redundant
 function load_path($type)

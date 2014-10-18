@@ -1,4 +1,4 @@
-<?php define('SITE', 'Bonjour!');
+<?php define('ENTRADA', 'Adelante!');
 
 // -----------------------------------------------------------
 // 	WELCOME TO INDEXHIBIT

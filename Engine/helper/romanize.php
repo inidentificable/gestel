@@ -1,5 +1,4 @@
-<?php if (!defined('SITE')) exit('No direct script access allowed');
-
+<?php if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.gestel.cl');
 
 function romanizeFile()
 {

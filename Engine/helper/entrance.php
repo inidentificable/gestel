@@ -1,6 +1,4 @@
-<?php if (!defined('SITE')) exit('No direct script access allowed');
-
-
+<?php if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.gestel.cl');
 // a small set of validators specifically for dealing with
 // get, post, cookies upon entry to system.
 // not the same as our 'processor' class
