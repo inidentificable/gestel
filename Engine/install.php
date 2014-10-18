@@ -1,4 +1,4 @@
-<?php define('SITE', 'Bonjour!');
+<?php define('ENTRADA', 'Adelante!');
 
 /**
  * Installation
@@ -144,7 +144,7 @@ function install_db()
 
     $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "settings` (
 		  `adm_id` tinyint(3) NOT NULL auto_increment,
-		  `site_name` varchar(40) NOT NULL,
+		  `ENTRADA_name` varchar(40) NOT NULL,
 		  `installdate` varchar(20) NOT NULL,
 		  `version` varchar(25) NOT NULL,
 		  `edition` int(11) NOT NULL,
@@ -193,18 +193,18 @@ function install_db()
 
     $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (1, 'exhibit', 0, 'Main', '<p>Edit this page.</p>', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/', 2, 'ffffff', '', 0, 0, 400, 100, 'grow', 0, 1, '2010', 0);";
 
-    $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (2, 'exhibit', 0, 'About this site', '<plug:ndxz_users />', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/about-this-site/', 1, 'ffffff', '', 0, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
+    $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (2, 'exhibit', 0, 'About this ENTRADA', '<plug:ndxz_users />', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/about-this-ENTRADA/', 1, 'ffffff', '', 0, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
 
     $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (3, 'exhibit', 0, '404 Error', 'Page not Found.', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/404/', 1, 'ffffff', '', 1, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
 
-    $sql[] = "INSERT INTO `" . PX . "objects_prefs` (`obj_id`, `obj_ref_type`, `obj_name`, `obj_email`, `obj_mode`, `obj_itop`, `obj_ibot`, `obj_apikey`, `obj_theme`, `obj_org`) VALUES (1, 'exhibit', '" . addslashes($c['n_site']) . "', '', 1, '<h1 id=\"title\"><a href=\"<%baseurl%>\"><span></span><%obj_name%></a></h1>', '<p>Copyright 2010</p>', '', 'jamesdodd', 0);";
+    $sql[] = "INSERT INTO `" . PX . "objects_prefs` (`obj_id`, `obj_ref_type`, `obj_name`, `obj_email`, `obj_mode`, `obj_itop`, `obj_ibot`, `obj_apikey`, `obj_theme`, `obj_org`) VALUES (1, 'exhibit', '" . addslashes($c['n_ENTRADA']) . "', '', 1, '<h1 id=\"title\"><a href=\"<%baseurl%>\"><span></span><%obj_name%></a></h1>', '<p>Copyright 2010</p>', '', 'jamesdodd', 0);";
 
     $sql[] = "INSERT INTO `" . PX . "sections` (`secid`, `section`, `sec_ord`, `sec_disp`, `sec_date`, `sec_path`, `sec_desc`, `sec_proj`, `sec_report`) VALUES
 		(1, 'root', 3, 1, '" . getNow() . "', '/', 'Info', 0, 0),
 		(2, 'projects', 2, 1, '" . getNow() . "', '/project', 'Projects', 1, 0),
 		(3, 'ongoing', 1, 1, '" . getNow() . "', '/project', 'On-going', 0, 0);";
 
-    $sql[] = "INSERT INTO `" . PX . "settings` (`adm_id`, `site_name`, `installdate`, `version`, `curr_time`, `time_format`, `help`) VALUES (1, '', '" . getNow() . "', '" . VERSION . "', 1, '%d %B %Y', 0);";
+    $sql[] = "INSERT INTO `" . PX . "settings` (`adm_id`, `ENTRADA_name`, `installdate`, `version`, `curr_time`, `time_format`, `help`) VALUES (1, '', '" . getNow() . "', '" . VERSION . "', 1, '%d %B %Y', 0);";
 
     $sql[] = "INSERT INTO `" . PX . "users` (`ID`, `userid`, `password`, `email`, `threads`, `writing`, `user_offset`, `user_format`, `user_lang`, `user_hash`, `user_help`, `user_mode`) VALUES (1, 'index1', '22645ed8b5f5fa4b597d0fe61bed6a96', '', 10, 0, 1, '%d %B %Y', '$picked', '5f8bfb51cc5c437a603abe3766d004d8', 0, 0);";
 
@@ -248,7 +248,7 @@ function writeConfig()
     $path = DIRNAME . BASENAME . '/config';
     $filename = $path . '/config.php';
 
-    $somecontent = "<?php  if (!defined('SITE')) exit('No direct script access allowed');
+    $somecontent = "<?php  if (!defined('ENTRADA')) exit('No direct script access allowed');
 
 \$indx['db'] 		= '$c[n_name]';
 \$indx['user'] 		= '$c[n_user]';
@@ -308,7 +308,7 @@ if (isset($_POST['n_submit'])) {
     $c['n_name'] = getPOST('n_name', '', 'connect', 65);
     $c['n_user'] = getPOST('n_user', '', 'connect', 50);
     $c['n_pwd'] = getPOST('n_pwd', '', 'connect', 50);
-    $c['n_site'] = getPOST('n_site', '', 'none', 50);
+    $c['n_ENTRADA'] = getPOST('n_ENTRADA', '', 'none', 50);
     $GLOBALS['c'] = $c;
 
     // check connection - tables exist?
@@ -478,7 +478,7 @@ header('Content-type: text/html; charset=utf-8');
 
                 // build the form here
                 echo "<label>" . $lang->word('exhibition name') . "</label><br />\n";
-                echo "<input type='text' name='n_site' value='" . showPosted('n_site') . "' maxlength='50' />\n";
+                echo "<input type='text' name='n_ENTRADA' value='" . showPosted('n_ENTRADA') . "' maxlength='50' />\n";
 
                 echo "<label>" . $lang->word('database server') . "</label><br />\n";
                 echo "<input type='text' name='n_host' value='" . showPosted('n_host') . "' maxlength='50' />\n";

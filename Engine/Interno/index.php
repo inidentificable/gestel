@@ -1,13 +1,38 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: inidentificable
- * Date: 25-08-14
- * Time: 03:36 AM
- */
-if (isset($_POST["autorizado"])) {
-    echo "Bienvenido, aun no hay nada por aqui";
-}else{
-    echo "Tu no puedes estar aqui";
+<?php if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.gestel.cl');
+
+//Definiendo los paquetes del directorio interno
+
+define('ControlDatos', '/ControlDatos');
+define('ControlUbicacion', '/ControlUbicacion');
+define('ControlUsuario', '/ControlUsuario');
+define('RegistroClienteProveedor', '/RegistroClienteProveedor');
+define('RegistroPropiedad', '/RegistroPropiedad');
+define('Ventas', '/Ventas');
+
+//función que carga las clases de un paquete determinado
+
+function CargarPaquete($nombreModulo)
+{
+    // let's get the folders and info...
+    $clases = array();
+
+    if (is_dir($nombreModulo)) {
+        if ($fp = opendir($nombreModulo)) {
+            while (($paquete = readdir($fp)) !== false) {
+
+                //ignora el index y carga todas las otras clases
+
+                if (!strpos($paquete, 'index', 0) === 0)
+                    $clases[] = $paquete;
+            }
+        }
+        closedir($fp);
+        foreach ($clases as $cargar) {
+            include_once $nombreModulo . $cargar;
+        }
+
+    }
+    return;
 }
+
 ?>
