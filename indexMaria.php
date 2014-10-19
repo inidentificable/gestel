@@ -1,182 +1,127 @@
 <?php
-//Por razones de seguridad y para impedir que usuario acceda a código interno
-//se declara la variable ENTRADA que permite acceder a los archivos de ENGINE
+/**
+ *GESTEL is free software: you can redistribute it and/or modify
+ *it under the terms of the GNU General Public License as published by
+ *the Free Software Foundation, either version 3 of the License, or
+ *(at your option) any later version.
+ *GESTEL is distributed in the hope that it will be useful,
+ *but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *GNU General Public License for more details.
+ *You should have received a copy of the GNU General Public License
+ *along with GESTEL.  If not, see <http://www.gnu.org/licenses/>.
+ * Created by PhpStorm.
+ * User: inidentificable
+ * Date: 18-10-14
+ * Time: 11:39 PM
+ */
+
+//Protege (encapsula) el código interno del resto del sitio
 
 define('ENTRADA', 'Adelante!');
 
-//Revisa que la base de datos esté instalada
-//si no está instalada redirige al instalador
+//Enciende lo siguiente si quieres depurar
+//error_reporting(E_ALL);
 
-if (file_exists('Engine/config/config.php')) require_once 'Engine/config/config.php';
+//Lo básico
+if (file_exists('Portal/config/config.php')) require_once 'Portal/config/config.php';
 else {
-    header('location: Engine/install.php');
+    header('location: Portal/install.php');
 }
 
-//Llama  a los archivos de inicialización del ENGINE
 
-require_once 'Engine/defaults.php';
-require_once 'Engine/common.php';
+require_once 'Portal/Inicializar.php';
+require_once 'Portal/FuncionesComunes.php';
+
+// make sure we have our connection array
+shutDownCheck();
+
+// messy, but seems to work
+$_REAL_SCRIPT_DIR = realpath(dirname($_SERVER['SCRIPT_FILENAME']));
+$_REAL_BASE_DIR = realpath(dirname(__FILE__));
+$_MY_PATH_PART = substr($_REAL_SCRIPT_DIR, strlen($_REAL_BASE_DIR));
+$uri = $_MY_PATH_PART
+    ? substr(dirname($_SERVER['SCRIPT_NAME']), 0, -strlen($_MY_PATH_PART))
+    : dirname($_SERVER['SCRIPT_NAME']);
+
+// clean up the uri
+$uri = (MODREWRITE == false) ?
+    str_replace('/index.php?', '', $_SERVER['REQUEST_URI']) :
+    entry_uri($uri, $_SERVER['REQUEST_URI']);
+
+// TEMPORARY
+// what if it's more than one folder up?
+$uri = str_replace($self, '', $uri);
+
+//remove out the third level of url since it doesn't work.
+if (count($uri_arr = explode('/', $uri)) > 3) {
+    $uri = '/' . $uri_arr[1] . '/' . $uri_arr[2] . '/';
+}
+
+// time to roll
+load_helpers(array('time'));
+$OBJ =& load_class('core', TRUE, 'lib');
+
+// page query
+$rs = $OBJ->db->fetchRecord("SELECT *
+	FROM " . PX . "objects, " . PX . "objects_prefs
+	WHERE url = '$uri'
+	AND status = '1'
+	AND object = obj_ref_type");
+
+if (!$rs) {
+    // try again with site root
+    $rs = $OBJ->db->fetchRecord("SELECT *
+		FROM " . PX . "objects, " . PX . "objects_prefs
+		WHERE id = 3
+		AND status = '1'
+		AND object = obj_ref_type");
+
+    // we don't search engines indexing this
+    header("HTTP/1.1 404 Not Found");
+
+    // we need a formal error page
+    if (!$rs) echo 'Page not found error here.';
+}
+// autoload 'plugins' folder
+include DIRNAME . BASENAME . '/site/plugin/index.php';
+
+// additional variables
+// perhaps we should port these differently?
+$rs['baseurl'] = BASEURL;
+$rs['basename'] = BASENAME;
+$rs['basefiles'] = BASEFILES;
+$rs['gimgs'] = GIMGS;
+
+// get the front end helper class
+$OBJ->lib_class('front');
+
+// time for some action
+if ($rs['obj_theme'] == 'eatock') {
+    $contents = $OBJ->front->front_eatock();
+} else {
+    $filename = DIRNAME . BASENAME . '/site/' . $rs['obj_theme'] . '/index.php';
+    $fp = @fopen($filename, 'r');
+    $contents = fread($fp, filesize($filename));
+    fclose($fp);
+}
+
+// makin' stuff happen
+$PARSE =& load_class('parse', TRUE, 'lib');
+$PARSE->vars = $rs;
+$PARSE->code = $contents;
+echo $PARSE->parsing();
+
+// do stats if they are wanted
+if ($default['statistics'] == TRUE) load_class('statistics', TRUE, 'lib');
+exit;
+
+//Se muestra la página html principal del sitio
+
+echo '<html>';
+
+include_once('Portal/site/gestel/head.php');
+include_once('Portal/site/gestel/body.php');
+
+echo '</html>';
 ?>
-
-<!DOCTYPE HTML>
-
-<html>
-<link rel="shortcut icon" href="http:favicon.ico">
-<style type="text/css">
-    <!--
-    .Estilo2 {
-        color: #FFFFFF
-    }
-
-    .captionTurquesa, .captionBlack {
-        color: #fff;
-        font-size: 20px;
-        line-height: 30px;
-        text-align: center;
-        border-radius: 4px;
-    }
-
-    .captionTurquesa {
-        background: #2AA198;
-        background-color: rgba(42, 161, 152, 0.49);
-    }
-
-    .bricon {
-        background: url(../img/browser-icons.png);
-    }
-
-    -->
-</style>
-<head>
-    <title>GESTEL</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    <link href="http://fonts.googleapis.com/css?family=Oswald:400,300" rel="stylesheet" type="text/css"/>
-    <!--[if lte IE 8]>
-    <script src="js/html5shiv.js"></script><![endif]-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/skel-panels.min.js"></script>
-    <script src="js/init.js"></script>
-    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="js/jssor.js"></script>
-    <script type="text/javascript" src="js/jssor.slider.js"></script>
-    <script type="text/javascript" src="js/slider.js"></script>
-    <noscript>
-        <link rel="stylesheet" href="css/skel-noscript.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
-        <link rel="stylesheet" href="css/style-desktop.css"/>
-    </noscript>
-</head>
-
-<body class="homepage">
-<div id="header-wrapper">
-    <div class="container">
-        <div id="header">
-            <?php include("menu.php"); ?>
-        </div>
-        <!--Div header -->
-        <div align="center">
-
-            <!-- <p align="right" class="button-style2"><a href="#">Regístrate&nbsp; </a></p> -->
-            <?php include("login.php"); ?>
-        </div>
-        <!-- div container -->
-    </div>
-    <!-- div header-wrapper -->
-
-    <div class="row">
-        <div id="banner" class="12u">
-            <div class="container">
-                <div id="slider1_container" style="position: relative; width: 600px; height: 300px; overflow: hidden;">
-
-                    <!-- Loading Screen -->
-                    <div u="loading" style="position: absolute; top: 0px; left: 0px;">
-                        <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
-                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
-                        </div>
-                        <div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;
-                top: 0px; left: 0px;width: 100%;height:100%;">
-                        </div>
-                    </div>
-
-                    <!-- Slides Container -->
-                    <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 300px;
-            overflow: hidden;">
-                        <div>
-                            <a u=image href="#"><img src="images/pics01.jpg"/></a>
-
-                            <div u=caption t="*" class="captionTurquesa"
-                                 style="position:absolute; left:20px; top: 30px; width:300px; height:30px;">
-                                Tú casa soñada
-                            </div>
-                        </div>
-                        <div>
-                            <a u=image href="#"><img src="images/pics02.jpg"/></a>
-
-                            <div u=caption t="*" class="captionTurquesa"
-                                 style="position:absolute; left:20px; top: 30px; width:300px; height:30px;">
-                                Lugares cómodos
-                            </div>
-                        </div>
-                        <div>
-                            <a u=image href="#"><img src="images/pics03.jpg"/></a>
-
-                            <div u=caption t="*" class="captionTurquesa"
-                                 style="position:absolute; left:20px; top: 30px; width:300px; height:30px;">
-                                Disfruta de tú vida
-                            </div>
-                        </div>
-                        <div>
-                            <a u=image href="#"><img src="images/pics04.jpg"/></a>
-
-                            <div u=caption t="*" class="captionTurquesa"
-                                 style="position:absolute; left:20px; top: 30px; width:300px; height:30px;">
-                                en la IV Regi&oacute;n
-                            </div>
-                        </div>
-                    </div>
-                    <!-- div container -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--row-->
-</div>
-<!--container -->
-<div id="wrapper">
-    <div class="container" id="marketing">
-        <div class="row divider">
-            <div class="3u">
-                <section>
-                    <p><a href="#"><img src="images/ico04.png" alt=""></a></p>
-                </section>
-            </div>
-            <div class="3u">
-                <section>
-                    <p><a href="#"><img src="images/ico05.png" alt=""></a></p>
-                </section>
-            </div>
-            <div class="3u">
-                <section>
-                    <p><a href="#"><img src="images/ico06.png" alt=""></a></p>
-                </section>
-            </div>
-            <div class="3u">
-                <section>
-                    <p><a href="#"><img src="images/ico07.png" alt=""></a></p>
-                </section>
-            </div>
-
-        </div>
-        <!-- div row divider -->
-    </div>
-    <!-- div marketing -->
-</div>
-<!-- div wrapper -->
-<?php include("container.php"); ?>
-</div>
-<?php include("footer.php"); ?>
-</body>
-</html>
