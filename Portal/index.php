@@ -1,58 +1,30 @@
-<?php define('ENTRADA', 'Adelante!');
+<?php if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.Gestel.cl');
+/**
+ *GESTEL is free software: you can redistribute it and/or modify
+ *it under the terms of the GNU General Public License as published by
+ *the Free Software Foundation, either version 3 of the License, or
+ *(at your option) any later version.
+ *GESTEL is distributed in the hope that it will be useful,
+ *but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *GNU General Public License for more details.
+ *You should have received a copy of the GNU General Public License
+ *along with GESTEL.  If not, see <http://www.gnu.org/licenses/>.
+ * Created by PhpStorm.
+ * User: inidentificable
+ * Date: 18-10-14
+ * Time: 11:39 PM
+ */
 
-// -----------------------------------------------------------
-// 	WELCOME TO INDEXHIBIT
-//
-//  A collaboration between Daniel Eatock and Tatiret, c.o.
-//  Open source and free to use for good in this world.
-//
-//  If we've missed a credit, or you simply deserve more
-//  credit today, just let us know. Thank you!!!
-//
-//  An MVC without the V. Or with a small v. ;)
-//
-//  Thank you for shopping at indexhibit.org
-// -----------------------------------------------------------
+define("AYUDANTES", PORTAL . "/Ayudantes");
+define("BASEDATOS", PORTAL . "/BaseDatos");
+define("CONFIGURACION", PORTAL . "/Configuracion");
+define("GESTEL", PORTAL . "/Gestel");
+define("LENGUAJE", PORTAL . "/Lenguaje");
+define("LIBRERIA", PORTAL . "/Libreria");
+define("MODULOS", PORTAL . "/Modulos");
+define("RECURSOS", PORTAL . "/Recursos");
 
-// turn this on if you want to check things
-//error_reporting(E_ALL);
-
-// the basics
-if (file_exists('config/config.php')) require_once 'config/config.php';
-
-require_once 'Inicializar.php';
-require_once 'FuncionesComunes.php';
-
-// make sure we have our connection array
-shutDownCheck();
-	
-// preloading things
-load_helpers(array('html', 'entrance', 'time', 'server'));
-
-// general tools for loading things
-load_class('core', FALSE, 'lib');
-
-// "I'm digging for fire" - Pixies	
-$OBJ =& load_class('router', TRUE, 'lib');
-
-// are we logged in?
-$OBJ->access->checkLogin();
-
-// get user prefernces
-$OBJ->lang->setlang($OBJ->access->prefs['user_lang']);
-
-// loading our module object
-$INDX =& load_class($go['a'], TRUE, 'mod', TRUE);
-
-// referencing wonkiness
-// review when there is time
-$aINDX =& $INDX;
-
-// loading our module method
-$OBJ->tunnel($aINDX, $go['a'], $go['q']);
-
-// output
-$INDX->template->output('index');
-
+include_once(GESTEL . "/index.php");
 
 ?>
