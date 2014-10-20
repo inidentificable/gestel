@@ -15,6 +15,15 @@
  * Date: 18-10-14
  * Time: 11:45 PM
  */
+
+include_once(LIBRERIA . "/Archivos.php");
+
+$listados = new Archivos();
+
+$listadoCss = $listados->listarArchivos(CSS);
+$listadoJs = $listados->listarArchivos(JS);
+$listadoLetras = $listados->listarArchivos(LETRAS);
+
 ?>
 <head>
     <title>GESTEL</title>
@@ -24,6 +33,27 @@
     <meta name="keywords" content="inmobiliaria"/>
 
     <!--  Seccion ingreso js -->
+
+    <?php
+    foreach ($listadoJs as $listando) {
+        echo '<script src="' . JS . '/' . $listadoJs . '"></script>';
+    }
+    ?>
+
     <!--  Seccion ingreso css -->
+
+    <?php
+    foreach ($listadoCss as $listando) {
+        echo '<link rel="stylesheet" href="' . CSS . '/' . $listadoCss . '" />';
+    }
+    ?>
+
     <!--  Seccion ingreso fonts -->
+
+    <?php
+    foreach ($listadoLetras as $listando) {
+        echo '<link href="' . LETRAS . ´ / ´ . $listadoLetras . '" rel="stylesheet" type="text/css">';
+    }
+    ?>
+
 </head>
