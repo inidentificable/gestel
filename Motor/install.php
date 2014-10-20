@@ -17,10 +17,10 @@
 
 require_once 'Inicializar.php';
 require_once 'FuncionesComunes.php';
-require_once './helper/entrance.php';
-require_once './helper/html.php';
-require_once './helper/time.php';
-require_once './lang/index.php';
+require_once './Ayudantes/entrance.php';
+require_once './Ayudantes/html.php';
+require_once './Ayudantes/time.php';
+require_once './Lenguaje/index.php';
 
 $page = getURI('page', 0, 'alnum', 1);
 
@@ -40,7 +40,7 @@ function install_db()
 {
     global $c, $picked;
 
-    require_once './config/config.php';
+    require_once './Configuracion/Configuracion.php';
 
     if (mysql_ver() <= 4) {
         $isam = 'TYPE=MyISAM';
@@ -193,7 +193,7 @@ function install_db()
 
     $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (1, 'exhibit', 0, 'Main', '<p>Edit this page.</p>', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/', 2, 'ffffff', '', 0, 0, 400, 100, 'grow', 0, 1, '2010', 0);";
 
-    $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (2, 'exhibit', 0, 'About this ENTRADA', '<plug:ndxz_users />', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/about-this-ENTRADA/', 1, 'ffffff', '', 0, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
+    $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (2, 'exhibit', 0, 'About this ENTRADA', '<plug:gstl_users />', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/about-this-ENTRADA/', 1, 'ffffff', '', 0, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
 
     $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (3, 'exhibit', 0, '404 Error', 'Page not Found.', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/404/', 1, 'ffffff', '', 1, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
 
@@ -209,7 +209,7 @@ function install_db()
     $sql[] = "INSERT INTO `" . PX . "users` (`ID`, `userid`, `password`, `email`, `threads`, `writing`, `user_offset`, `user_format`, `user_lang`, `user_hash`, `user_help`, `user_mode`) VALUES (1, 'index1', '22645ed8b5f5fa4b597d0fe61bed6a96', '', 10, 0, 1, '%d %B %Y', '$picked', '5f8bfb51cc5c437a603abe3766d004d8', 0, 0);";
 
     $link = @mysql_connect($indx['host'], $indx['user'], $indx['pass']);
-    if (@mysql_select_db($indx['db'], $link)) {
+    if (@mysql_select_db($indx['BaseDatos'], $link)) {
         foreach ($sql as $install) {
             @mysql_query($install);
         }
@@ -245,12 +245,12 @@ function writeConfig()
 
     if (!is_array($c)) exit;
 
-    $path = DIRNAME . BASENAME . '/config';
-    $filename = $path . '/config.php';
+    $path = DIRNAME . BASENAME . '/Configuracion';
+    $filename = $path . '/Configuracion.php';
 
-    $somecontent = "<?php  if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.gestel.cl');
+    $somecontent = "<?php  if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.Gestel.cl');
 
-\$indx['db'] 		= '$c[n_name]';
+\$indx['BaseDatos'] 		= '$c[n_name]';
 \$indx['user'] 		= '$c[n_user]';
 \$indx['pass'] 		= '$c[n_pwd]';
 \$indx['host'] 		= '$c[n_host]';
@@ -289,8 +289,8 @@ function getLanguage($default = '', $name, $attr = '')
     foreach ($rs as $key => $a) {
         $language = array_pop($a);
 
-        // check to see if the lang folder exists
-        if (is_dir(DIRNAME . BASENAME . '/' . LANGPATH . '/' . $key)) {
+        // check to see if the Lenguaje folder exists
+        if (is_dir(DIRNAME . BASENAME . '/' . DireccionLenguajes . '/' . $key)) {
             ($default == $a) ? $sl = "selected " : $sl = "";
             $s .= option($key, $lang->word($language), $default, $key);
         }
@@ -334,7 +334,7 @@ if (isset($_POST['n_submit'])) {
             }
         }
     } else {
-        $s = "<p><span class='ok-not'>XX</span> " . $lang->word('check config') . "</p><br />";
+        $s = "<p><span class='ok-not'>XX</span> " . $lang->word('check Configuracion') . "</p><br />";
         $s .= "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
     }
 } else {
@@ -363,7 +363,7 @@ header('Content-type: text/html; charset=utf-8');
 
     <title>Install : Indexhibit</title>
 
-    <link type="text/css" rel='stylesheet' href="asset/css/style.css"/>
+    <link type="text/css" rel='stylesheet' href="Recursos/css/style.css"/>
 
     <style type='text/css'>
         body {
@@ -433,11 +433,11 @@ header('Content-type: text/html; charset=utf-8');
                 if (file_exists(DIRNAME . '/.htaccess'))
                 {
                     $flagA = true;
-                    echo "<p><span class='ok'>OK</span> " . $lang->word('htaccess ok') . "</p>";
+                    echo "<p><span class='ok'>OK</span> " . $Lenguaje->word('htaccess ok') . "</p>";
                 }
                 else
                 {
-                    echo "<p><span class='ok-not'>??</span> " . $lang->word('htaccess not ok') . "</p>";
+                    echo "<p><span class='ok-not'>??</span> " . $Lenguaje->word('htaccess not ok') . "</p>";
                 }
                 */
 
@@ -455,15 +455,15 @@ header('Content-type: text/html; charset=utf-8');
                     echo "<p><span class='ok-not'>XX</span> " . $lang->word('filesgimgs not ok') . "</p>";
                 }
 
-                if ((is_dir(DIRNAME . '/Portal/config')) && (is_writable(DIRNAME . '/Portal/config'))) {
+                if ((is_dir(DIRNAME . '/Portal/Configuracion')) && (is_writable(DIRNAME . '/Portal/Configuracion'))) {
                     $flagD = true;
-                    echo "<p><span class='ok'>OK</span> " . $lang->word('config ok') . "</p>\n";
+                    echo "<p><span class='ok'>OK</span> " . $lang->word('Configuracion ok') . "</p>\n";
                 } else {
-                    echo "<p><span class='ok-not'>XX</span> " . $lang->word('config not ok') . "</p>";
+                    echo "<p><span class='ok-not'>XX</span> " . $lang->word('Configuracion not ok') . "</p>";
                 }
 
                 if (($flagB == true) && ($flagC == true) && ($flagD == true)) {
-                    echo "<br /><p><strong>" . $lang->word('try db setup now') . "</strong></p>";
+                    echo "<br /><p><strong>" . $lang->word('try BaseDatos setup now') . "</strong></p>";
                     echo "<br /><p><a href='?page=2'>" . $lang->word('continue') . "</a></p><br />";
                 } else {
                     echo "<br /><p><strong>" . $lang->word('please correct errors') . "<strong></p><br />";

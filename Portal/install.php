@@ -1,62 +1,59 @@
 <?php define('ENTRADA', 'Adelante!');
 
 /**
-* Installation
-*
-* Not going to bother documenting this...oi vey... ;)
-* We'll make if better some day.
-*
-* See readme.txt for additional installation instructions
-* 
-* @version 1.0
-* @author Vaska
-*/
+ * Installation
+ *
+ * Not going to bother documenting this...oi vey... ;)
+ * We'll make if better some day.
+ *
+ * See readme.txt for additional installation instructions
+ *
+ * @version 1.0
+ * @author Vaska
+ */
 
-	// turn this on if you want to check things
-	//error_reporting(E_ALL);
+// turn this on if you want to check things
+//error_reporting(E_ALL);
 
-	require_once 'Inicializar.php';
-	require_once 'FuncionesComunes.php';
-	require_once './helper/entrance.php';
-	require_once './helper/html.php';
-	require_once './helper/time.php';
-	require_once './lang/index.php';
-	
-	$page = getURI('page', 0, 'alnum', 1);
-	
-	// set cookie
-	if (isset($_POST['submitLang']) && ($_POST['user_lang'] != ''))
-	{
-		setcookie('install', $_POST['user_lang'], time()+3600);
-		header("location:install.php?page=1");
-	}
-	
-	// look for the cookie here
-	$picked = (isset($_COOKIE['install'])) ? $_COOKIE['install'] : 'en-us';
-	
-	$lang = new Lang;
-	$lang->setlang($picked);
-	
-	function install_db()
-	{
-		global $c, $picked;
-		
-		require_once './config/config.php';
-		
-		if (mysql_ver() <= 4)
-		{
-			$isam = 'TYPE=MyISAM';
-		}
-		else // it's 5
-		{
-			// address this later
-			//$isam = 'ENGINE=MyISAM DEFAULT CHARSET=utf8';
-			$isam = 'TYPE=MyISAM';
-		}
-		
-		$sql = array();
-		
-		$sql[] = "CREATE TABLE IF NOT EXISTS `iptocountry` (
+require_once 'Inicializar.php';
+require_once 'FuncionesComunes.php';
+require_once './Ayudantes/entrance.php';
+require_once './Ayudantes/html.php';
+require_once './Ayudantes/time.php';
+require_once './Lenguaje/index.php';
+
+$page = getURI('page', 0, 'alnum', 1);
+
+// set cookie
+if (isset($_POST['submitLang']) && ($_POST['user_lang'] != '')) {
+    setcookie('install', $_POST['user_lang'], time() + 3600);
+    header("location:install.php?page=1");
+}
+
+// look for the cookie here
+$picked = (isset($_COOKIE['install'])) ? $_COOKIE['install'] : 'en-us';
+
+$lang = new Lang;
+$lang->setlang($picked);
+
+function install_db()
+{
+    global $c, $picked;
+
+    require_once './Configuracion/configuracion.php';
+
+    if (mysql_ver() <= 4) {
+        $isam = 'TYPE=MyISAM';
+    } else // it's 5
+    {
+        // address this later
+        //$isam = 'ENGINE=MyISAM DEFAULT CHARSET=utf8';
+        $isam = 'TYPE=MyISAM';
+    }
+
+    $sql = array();
+
+    $sql[] = "CREATE TABLE IF NOT EXISTS `iptocountry` (
 		  `ip_from` double NOT NULL default '0',
 		  `ip_to` double NOT NULL default '0',
 		  `country_code2` char(2) NOT NULL,
@@ -64,8 +61,8 @@
 		  `country_name` varchar(50) NOT NULL,
 		  KEY `ip_from_to_idx` (`ip_from`,`ip_to`)
 		) $isam ;";
-		
-		$sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "media` (
+
+    $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "media` (
 		  `media_id` int(11) NOT NULL auto_increment,
 		  `media_ref_id` smallint(6) NOT NULL default '0',
 		  `media_obj_type` varchar(15) NOT NULL,
@@ -84,7 +81,7 @@
 		  PRIMARY KEY  (`media_id`)
 		) $isam ;";
 
-		$sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "objects` (
+    $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "objects` (
 		  `id` int(11) NOT NULL auto_increment,
 		  `object` varchar(100) NOT NULL,
 		  `obj_ref_id` int(4) NOT NULL default '0',
@@ -116,7 +113,7 @@
 		) $isam ;";
 
 
-		$sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "objects_prefs` (
+    $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "objects_prefs` (
 		  `obj_id` int(11) NOT NULL auto_increment,
 		  `obj_ref_type` varchar(255) NOT NULL,
 		  `obj_name` varchar(255) NOT NULL,
@@ -131,7 +128,7 @@
 		) $isam ;";
 
 
-		$sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "sections` (
+    $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "sections` (
 		  `secid` tinyint(3) NOT NULL auto_increment,
 		  `section` varchar(60) NOT NULL,
 		  `sec_ord` tinyint(4) NOT NULL default '0',
@@ -145,8 +142,7 @@
 		) $isam ;";
 
 
-
-		$sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "settings` (
+    $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "settings` (
 		  `adm_id` tinyint(3) NOT NULL auto_increment,
 		  `site_name` varchar(40) NOT NULL,
 		  `installdate` varchar(20) NOT NULL,
@@ -159,7 +155,7 @@
 		) $isam ;";
 
 
-		$sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "stats` (
+    $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "stats` (
 		  `hit_id` int(14) NOT NULL auto_increment,
 		  `hit_addr` varchar(16) NOT NULL,
 		  `hit_country` varchar(30) NOT NULL,
@@ -176,7 +172,7 @@
 		) $isam ;";
 
 
-		$sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "users` (
+    $sql[] = "CREATE TABLE IF NOT EXISTS `" . PX . "users` (
 		  `ID` int(11) NOT NULL auto_increment,
 		  `userid` varchar(100) NOT NULL,
 		  `password` varchar(32) NOT NULL,
@@ -194,71 +190,67 @@
 		  UNIQUE KEY `userid` (`userid`),
 		  KEY `ID` (`ID`)
 		) $isam ;";
-		
-		$sql[] = "INSERT INTO `".PX."objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (1, 'exhibit', 0, 'Main', '<p>Edit this page.</p>', '0', '', '".getNow()."', '".getNow()."', 1, 1, 1, 0, 1, '/', 2, 'ffffff', '', 0, 0, 400, 100, 'grow', 0, 1, '2010', 0);";
-		
-		$sql[] = "INSERT INTO `".PX."objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (2, 'exhibit', 0, 'About this site', '<plug:ndxz_users />', '0', '', '".getNow()."', '".getNow()."', 1, 1, 1, 0, 1, '/about-this-site/', 1, 'ffffff', '', 0, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
 
-		$sql[] = "INSERT INTO `".PX."objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (3, 'exhibit', 0, '404 Error', 'Page not Found.', '0', '', '".getNow()."', '".getNow()."', 1, 1, 1, 0, 1, '/404/', 1, 'ffffff', '', 1, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
-		
-		$sql[] = "INSERT INTO `".PX."objects_prefs` (`obj_id`, `obj_ref_type`, `obj_name`, `obj_email`, `obj_mode`, `obj_itop`, `obj_ibot`, `obj_apikey`, `obj_theme`, `obj_org`) VALUES (1, 'exhibit', '".addslashes($c['n_site'])."', '', 1, '<h1 id=\"title\"><a href=\"<%baseurl%>\"><span></span><%obj_name%></a></h1>', '<p>Copyright 2010</p>', '', 'jamesdodd', 0);";
-		
-		$sql[] = "INSERT INTO `".PX."sections` (`secid`, `section`, `sec_ord`, `sec_disp`, `sec_date`, `sec_path`, `sec_desc`, `sec_proj`, `sec_report`) VALUES 
-		(1, 'root', 3, 1, '".getNow()."', '/', 'Info', 0, 0), 
-		(2, 'projects', 2, 1, '".getNow()."', '/project', 'Projects', 1, 0),
-		(3, 'ongoing', 1, 1, '".getNow()."', '/project', 'On-going', 0, 0);";
-		
-		$sql[] = "INSERT INTO `".PX."settings` (`adm_id`, `site_name`, `installdate`, `version`, `curr_time`, `time_format`, `help`) VALUES (1, '', '".getNow()."', '".VERSION."', 1, '%d %B %Y', 0);";
+    $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (1, 'exhibit', 0, 'Main', '<p>Edit this page.</p>', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/', 2, 'ffffff', '', 0, 0, 400, 100, 'grow', 0, 1, '2010', 0);";
 
-		$sql[] = "INSERT INTO `".PX."users` (`ID`, `userid`, `password`, `email`, `threads`, `writing`, `user_offset`, `user_format`, `user_lang`, `user_hash`, `user_help`, `user_mode`) VALUES (1, 'index1', '22645ed8b5f5fa4b597d0fe61bed6a96', '', 10, 0, 1, '%d %B %Y', '$picked', '5f8bfb51cc5c437a603abe3766d004d8', 0, 0);";
-		
-		$link = @mysql_connect($indx['host'], $indx['user'], $indx['pass']);
-		if (@mysql_select_db($indx['db'], $link))
-		{
-			foreach ($sql as $install)
-			{
-				@mysql_query($install);
-			}
-		}
-	}
+    $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (2, 'exhibit', 0, 'About this Sitio', '<plug:gstl_users />', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/about-this-Sitio/', 1, 'ffffff', '', 0, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
+
+    $sql[] = "INSERT INTO `" . PX . "objects` (`id`, `object`, `obj_ref_id`, `title`, `content`, `tags`, `header`, `udate`, `pdate`, `creator`, `status`, `process`, `page_cache`, `section_id`, `url`, `ord`, `color`, `bgimg`, `hidden`, `current`, `images`, `thumbs`, `format`, `break`, `tiling`, `year`, `report`) VALUES (3, 'exhibit', 0, '404 Error', 'Page not Found.', '0', '', '" . getNow() . "', '" . getNow() . "', 1, 1, 1, 0, 1, '/404/', 1, 'ffffff', '', 1, 0, 9999, 200, 'grow', 0, 1, '2010', 0);";
+
+    $sql[] = "INSERT INTO `" . PX . "objects_prefs` (`obj_id`, `obj_ref_type`, `obj_name`, `obj_email`, `obj_mode`, `obj_itop`, `obj_ibot`, `obj_apikey`, `obj_theme`, `obj_org`) VALUES (1, 'exhibit', '" . addslashes($c['n_site']) . "', '', 1, '<h1 id=\"title\"><a href=\"<%baseurl%>\"><span></span><%obj_name%></a></h1>', '<p>Copyright 2010</p>', '', 'jamesdodd', 0);";
+
+    $sql[] = "INSERT INTO `" . PX . "sections` (`secid`, `section`, `sec_ord`, `sec_disp`, `sec_date`, `sec_path`, `sec_desc`, `sec_proj`, `sec_report`) VALUES
+		(1, 'root', 3, 1, '" . getNow() . "', '/', 'Info', 0, 0),
+		(2, 'projects', 2, 1, '" . getNow() . "', '/project', 'Projects', 1, 0),
+		(3, 'ongoing', 1, 1, '" . getNow() . "', '/project', 'On-going', 0, 0);";
+
+    $sql[] = "INSERT INTO `" . PX . "settings` (`adm_id`, `site_name`, `installdate`, `version`, `curr_time`, `time_format`, `help`) VALUES (1, '', '" . getNow() . "', '" . VERSION . "', 1, '%d %B %Y', 0);";
+
+    $sql[] = "INSERT INTO `" . PX . "users` (`ID`, `userid`, `password`, `email`, `threads`, `writing`, `user_offset`, `user_format`, `user_lang`, `user_hash`, `user_help`, `user_mode`) VALUES (1, 'index1', '22645ed8b5f5fa4b597d0fe61bed6a96', '', 10, 0, 1, '%d %B %Y', '$picked', '5f8bfb51cc5c437a603abe3766d004d8', 0, 0);";
+
+    $link = @mysql_connect($indx['host'], $indx['user'], $indx['pass']);
+    if (@mysql_select_db($indx['BaseDatos'], $link)) {
+        foreach ($sql as $install) {
+            @mysql_query($install);
+        }
+    }
+}
 
 
-	function mysql_ver()
-	{
-		$ver = mysql_get_client_info();
-		$num = explode('.', $ver);
-		return $num[0];
-	}
-	
-	function showPosted($var)
-	{
-		global $c;
-		
-		if ((!isset($c['n_host']) && ($var == 'n_host'))) return 'localhost';
-		
-		if (isset($c[$var]))
-		{
-			if ($var == 'n_host')
-			{
-				return ($c['n_host'] == 'localhost') ? 'localhost' : $c['n_host'];
-			}
-			
-			return $c[$var];
-		}
-	}
-	
-	function writeConfig()
-	{
-		global $c;
-		
-		if (!is_array($c)) exit;
-		
-		$path = DIRNAME . BASENAME . '/config';
-		$filename = $path . '/config.php';
-		
-		$somecontent = "<?php  if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.gestel.cl');
+function mysql_ver()
+{
+    $ver = mysql_get_client_info();
+    $num = explode('.', $ver);
+    return $num[0];
+}
 
-\$indx['db'] 		= '$c[n_name]';
+function showPosted($var)
+{
+    global $c;
+
+    if ((!isset($c['n_host']) && ($var == 'n_host'))) return 'localhost';
+
+    if (isset($c[$var])) {
+        if ($var == 'n_host') {
+            return ($c['n_host'] == 'localhost') ? 'localhost' : $c['n_host'];
+        }
+
+        return $c[$var];
+    }
+}
+
+function writeConfig()
+{
+    global $c;
+
+    if (!is_array($c)) exit;
+
+    $path = DIRNAME . BASENAME . '/Configuracion';
+    $filename = $path . '/Configuracion.php';
+
+    $somecontent = "<?php  if (!defined('ENTRADA')) exit('no puedes acceder directamente a este contenido, vuelve al indice http://www.Gestel.cl');
+
+\$indx['BaseDatos'] 		= '$c[n_name]';
 \$indx['user'] 		= '$c[n_user]';
 \$indx['pass'] 		= '$c[n_pwd]';
 \$indx['host'] 		= '$c[n_host]';
@@ -266,284 +258,277 @@
 
 ?>";
 
-		if (is_writable($path)) 
-		{
-			if (!$handle = fopen($filename, 'w')) 
-			{
-				return FALSE;
-			}
+    if (is_writable($path)) {
+        if (!$handle = fopen($filename, 'w')) {
+            return FALSE;
+        }
 
-			if (fwrite($handle, $somecontent) === FALSE) 
-			{
-				return FALSE;
-			}
+        if (fwrite($handle, $somecontent) === FALSE) {
+            return FALSE;
+        }
 
-			fclose($handle);
-			return TRUE;
-		}
+        fclose($handle);
+        return TRUE;
+    }
 
-		return FALSE;
-	}
-	
-	function getLanguage($default='', $name, $attr='')
-	{
-		global $lang;
+    return FALSE;
+}
 
-		$s = '';
+function getLanguage($default = '', $name, $attr = '')
+{
+    global $lang;
 
-		$rs = $lang->lang_options();
+    $s = '';
 
-		if ($default == '')
-		{
-			$s .= option('', $lang->word('make selection'), 0, 0);
-		}
+    $rs = $lang->lang_options();
 
-		foreach ($rs as $key => $a) 
-		{
-			$language = array_pop($a);
+    if ($default == '') {
+        $s .= option('', $lang->word('make selection'), 0, 0);
+    }
 
-			// check to see if the lang folder exists
-			if (is_dir(DIRNAME . BASENAME . '/' . LANGPATH . '/' . $key))
-			{
-				($default == $a) ? $sl = "selected ": $sl = "";
-				$s .= option($key, $lang->word($language), $default, $key);
-			}
-		}
-		clearstatcache();
+    foreach ($rs as $key => $a) {
+        $language = array_pop($a);
 
-		return select($name, attr($attr), $s);
-	}
-	
-	
-	// try to connect & install
-	if (isset($_POST['n_submit']))
-	{
-		// check the vars...clean...
-		$c['n_host']	= getPOST('n_host', '', 'connect', 100);
-		$c['n_name']	= getPOST('n_name', '', 'connect', 65);
-		$c['n_user']	= getPOST('n_user', '', 'connect', 50);
-		$c['n_pwd']		= getPOST('n_pwd', '', 'connect', 50);
-		$c['n_site']	= getPOST('n_site', '', 'none', 50);
-		$GLOBALS['c'] = $c;
-		
-		// check connection - tables exist?
-		$link = @mysql_connect($c['n_host'], $c['n_user'], $c['n_pwd']);
-	
-		if (@mysql_select_db($c['n_name'], $link) && (writeConfig() == TRUE))
-		{	
-			$result = @mysql_query("SELECT * FROM ".PX."settings WHERE adm_id = 1");
-		
-			if ($result)
-			{
-				header("location:install.php?page=3&s=success");
-			}
-			else
-			{
-				// this is where we try to install
-				install_db();
-			
-				// let's check
-				$result = @mysql_query("SELECT * FROM ".PX."settings WHERE adm_id = 1");
-			
-				if ($result)
-				{
-					header("location:install.php?page=3&s=success");
-				}
-				else
-				{
-					$s = "<p><span class='ok-not'>XX</span> " . $lang->word('cannot install') . "</p><br />";
-					$s .= "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
-				}
-			}
-		}
-		else
-		{
-			$s = "<p><span class='ok-not'>XX</span> " . $lang->word('check config') . "</p><br />";
-			$s .= "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
-		}
-	}
-	else
-	{
-		// make error note
-	}
-	
-	function makeEdition()
-	{
-		$rest = 'http://api.indexhibit.org/?method=edition&url=' . urlencode(BASEURL);
-		$edition = @file_get_contents($rest);
-		
-		//@mysql_query("");
-		//return ($edition == '') ? 0 : $edition;
-		
-		return;
-	}
-	
-	header ('Content-type: text/html; charset=utf-8');
+        // check to see if the Lenguaje folder exists
+        if (is_dir(DIRNAME . BASENAME . '/' . DireccionLenguajes . '/' . $key)) {
+            ($default == $a) ? $sl = "selected " : $sl = "";
+            $s .= option($key, $lang->word($language), $default, $key);
+        }
+    }
+    clearstatcache();
+
+    return select($name, attr($attr), $s);
+}
+
+
+// try to connect & install
+if (isset($_POST['n_submit'])) {
+    // check the vars...clean...
+    $c['n_host'] = getPOST('n_host', '', 'connect', 100);
+    $c['n_name'] = getPOST('n_name', '', 'connect', 65);
+    $c['n_user'] = getPOST('n_user', '', 'connect', 50);
+    $c['n_pwd'] = getPOST('n_pwd', '', 'connect', 50);
+    $c['n_site'] = getPOST('n_site', '', 'none', 50);
+    $GLOBALS['c'] = $c;
+
+    // check connection - tables exist?
+    $link = @mysql_connect($c['n_host'], $c['n_user'], $c['n_pwd']);
+
+    if (@mysql_select_db($c['n_name'], $link) && (writeConfig() == TRUE)) {
+        $result = @mysql_query("SELECT * FROM " . PX . "settings WHERE adm_id = 1");
+
+        if ($result) {
+            header("location:install.php?page=3&s=success");
+        } else {
+            // this is where we try to install
+            install_db();
+
+            // let's check
+            $result = @mysql_query("SELECT * FROM " . PX . "settings WHERE adm_id = 1");
+
+            if ($result) {
+                header("location:install.php?page=3&s=success");
+            } else {
+                $s = "<p><span class='ok-not'>XX</span> " . $lang->word('cannot install') . "</p><br />";
+                $s .= "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
+            }
+        }
+    } else {
+        $s = "<p><span class='ok-not'>XX</span> " . $lang->word('check Configuracion') . "</p><br />";
+        $s .= "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
+    }
+} else {
+    // make error note
+}
+
+function makeEdition()
+{
+    $rest = 'http://api.indexhibit.org/?method=edition&url=' . urlencode(BASEURL);
+    $edition = @file_get_contents($rest);
+
+    //@mysql_query("");
+    //return ($edition == '') ? 0 : $edition;
+
+    return;
+}
+
+header('Content-type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Install : Indexhibit</title>
+    <title>Install : Indexhibit</title>
 
-<link type="text/css" rel='stylesheet'  href="asset/css/style.css" />
-	
-<style type='text/css'>
-body { font-family: Arial, Helvetica, Verdana, sans-serif; font-size: 10px; }
-h1, h2 { margin: 6px 0 0 3px; }
-h2 { margin-bottom: 6px; }
-p { margin: 0 0 6px 3px; font-size: 12px; width: 300px; }
-p.red { color: #c00; }
-code { margin: 18px 0; font-size: 12px; }
-.ok { color: #0c0; padding-right: 9px; }
-.ok-not { color: #f00; padding-right: 9px; }
-#footer { border-top: none; }
-#log-form { margin-left: 3px; }
-</style>
+    <link type="text/css" rel='stylesheet' href="Recursos/css/style.css"/>
+
+    <style type='text/css'>
+        body {
+            font-family: Arial, Helvetica, Verdana, sans-serif;
+            font-size: 10px;
+        }
+
+        h1, h2 {
+            margin: 6px 0 0 3px;
+        }
+
+        h2 {
+            margin-bottom: 6px;
+        }
+
+        p {
+            margin: 0 0 6px 3px;
+            font-size: 12px;
+            width: 300px;
+        }
+
+        p.red {
+            color: #c00;
+        }
+
+        code {
+            margin: 18px 0;
+            font-size: 12px;
+        }
+
+        .ok {
+            color: #0c0;
+            padding-right: 9px;
+        }
+
+        .ok-not {
+            color: #f00;
+            padding-right: 9px;
+        }
+
+        #footer {
+            border-top: none;
+        }
+
+        #log-form {
+            margin-left: 3px;
+        }
+    </style>
 </head>
 
 <body>
 <div id='all'>
 
-<h1>Indexhibit</h1>
+    <h1>Indexhibit</h1>
 
-<div id='main'>
+    <div id='main'>
 
-<form action='' method='post'>
-	
-<?php
+        <form action='' method='post'>
 
-	if ($page == 0)
-	{
-		echo ips($lang->word('your language'), 'getLanguage', 'user_lang', NULL, NULL, 'text');
-		echo "<input type='submit' name='submitLang' value='NEXT &raquo;' />\n";
-	}
-	elseif ($page == 1)
-	{
-		/* Review later
-		if (file_exists(DIRNAME . '/.htaccess'))
-		{
-			$flagA = true;
-			echo "<p><span class='ok'>OK</span> " . $lang->word('htaccess ok') . "</p>";
-		}
-		else
-		{
-			echo "<p><span class='ok-not'>??</span> " . $lang->word('htaccess not ok') . "</p>";
-		}
-		*/
-		
-		if ((is_dir(DIRNAME . '/Archivos')) && (is_writable(DIRNAME . '/Archivos')))
-		{
-			$flagB = true;
-			echo "<p><span class='ok'>OK</span> " . $lang->word('Archivos ok') . "</p>\n";
-		}
-		else
-		{
-			echo "<p><span class='ok-not'>XX</span> " . $lang->word('Archivos not ok') . "</p>";
-		}
-		
-		if ((is_dir(DIRNAME . '/Archivos/gimgs')) && (is_writable(DIRNAME . '/Archivos/gimgs')))
-		{
-			$flagC = true;
-			echo "<p><span class='ok'>OK</span> " . $lang->word('filesgimgs ok') . "</p>";
-		}
-		else
-		{
-			echo "<p><span class='ok-not'>XX</span> " . $lang->word('filesgimgs not ok') . "</p>";
-		}
-		
-		if ((is_dir(DIRNAME . '/Portal/config')) && (is_writable(DIRNAME . '/Portal/config')))
-		{
-			$flagD = true;
-			echo "<p><span class='ok'>OK</span> " . $lang->word('config ok') . "</p>\n";
-		}
-		else
-		{
-			echo "<p><span class='ok-not'>XX</span> " . $lang->word('config not ok') . "</p>";
-		}
-		
-		if (($flagB == true) && ($flagC == true) && ($flagD == true))
-		{
-			echo "<br /><p><strong>" . $lang->word('try db setup now') . "</strong></p>";
-			echo "<br /><p><a href='?page=2'>" . $lang->word('continue') . "</a></p><br />";
-		}
-		else
-		{
-			echo "<br /><p><strong>" . $lang->word('please correct errors') . "<strong></p><br />";
-			echo "<p><strong>" . $lang->word('refresh page') . "</strong></p><br />";
-			echo "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
-		}
-		
-		// we need gd library and mbstring and php4+ and mysql 3.23+
-	}
-	elseif ($page == 2)
-	{
-		echo "<div id='log-form'>\n";
-		echo "<form name='iform' method='post'>\n";
-		
-		// build the form here
-		echo "<label>" . $lang->word('exhibition name') . "</label><br />\n";
-		echo "<input type='text' name='n_site' value='".showPosted('n_site')."' maxlength='50' />\n";
-		
-		echo "<label>" . $lang->word('database server') . "</label><br />\n";
-		echo "<input type='text' name='n_host' value='".showPosted('n_host')."' maxlength='50' />\n";
-		
-		echo "<label>" . $lang->word('database name') . "</label><br />\n";
-		echo "<input type='text' name='n_name' value='".showPosted('n_name')."' maxlength='50' />\n";
-		
-		echo "<label>" . $lang->word('database username') . "</label><br />\n";
-		echo "<input type='text' name='n_user' value='".showPosted('n_user')."' maxlength='50' />\n";
-		
-		echo "<label>" . $lang->word('database password') . "</label><br />\n";
-		echo "<input type='password' name='n_pwd' value='".showPosted('n_pwd')."' maxlength='35' />\n";
+            <?php
 
-		echo "<input type='submit' name='n_submit' value='" . $lang->word('submit') . "' maxlength='50' /><br />\n";
-		
-		echo "</form>\n";
-		
-		if (isset($s)) echo $s;
-		
-		echo "</div>\n";
-	}
-	elseif ($page == 3)
-	{
-		if ($_GET['s'] == 'success')
-		{
-			echo "<p><span class='ok'>OK</span> " . $lang->word('database is ready') . "</p>";
-			
-			echo "<p><strong>" . $lang->word('default login') . "</strong></p>";
-			echo "<p>" . $lang->word('change settings') . "</p>";
-			echo "<br /><p><a href='".BASEURL.BASENAME."/'>" . $lang->word('lets login') . "</a></p><br />";
-			// let's get an edition number
-			makeEdition();
-		}
-		else
-		{
-			echo "<p><span class='ok-not'>XX</span> " . $lang->word('cannot install') . "</p><br />";
-			echo "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
-		}
-	}
-	else
-	{
-		echo "<p class='red'>" . $lang->word('freak out') . "</p><br />";
-		echo "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
-	}
+            if ($page == 0) {
+                echo ips($lang->word('your language'), 'getLanguage', 'user_lang', NULL, NULL, 'text');
+                echo "<input type='submit' name='submitLang' value='NEXT &raquo;' />\n";
+            } elseif ($page == 1) {
+                /* Review later
+                if (file_exists(DIRNAME . '/.htaccess'))
+                {
+                    $flagA = true;
+                    echo "<p><span class='ok'>OK</span> " . $Lenguaje->word('htaccess ok') . "</p>";
+                }
+                else
+                {
+                    echo "<p><span class='ok-not'>??</span> " . $Lenguaje->word('htaccess not ok') . "</p>";
+                }
+                */
 
-?>
-</form>
+                if ((is_dir(DIRNAME . '/Archivos')) && (is_writable(DIRNAME . '/Archivos'))) {
+                    $flagB = true;
+                    echo "<p><span class='ok'>OK</span> " . $lang->word('Archivos ok') . "</p>\n";
+                } else {
+                    echo "<p><span class='ok-not'>XX</span> " . $lang->word('Archivos not ok') . "</p>";
+                }
 
-<div class='cl'><!-- --></div>
+                if ((is_dir(DIRNAME . '/Archivos/gimgs')) && (is_writable(DIRNAME . '/Archivos/gimgs'))) {
+                    $flagC = true;
+                    echo "<p><span class='ok'>OK</span> " . $lang->word('filesgimgs ok') . "</p>";
+                } else {
+                    echo "<p><span class='ok-not'>XX</span> " . $lang->word('filesgimgs not ok') . "</p>";
+                }
 
-</div>
+                if ((is_dir(DIRNAME . '/Portal/Configuracion')) && (is_writable(DIRNAME . '/Portal/Configuracion'))) {
+                    $flagD = true;
+                    echo "<p><span class='ok'>OK</span> " . $lang->word('Configuracion ok') . "</p>\n";
+                } else {
+                    echo "<p><span class='ok-not'>XX</span> " . $lang->word('Configuracion not ok') . "</p>";
+                }
 
-<div id='footer' class='c2'>
-	<div class='col'><a href='<?php echo BASEURL.BASENAME ?>/license.txt'>License</a></div>
-	<div class='cl'><!-- --></div>
-</div>
-	
+                if (($flagB == true) && ($flagC == true) && ($flagD == true)) {
+                    echo "<br /><p><strong>" . $lang->word('try BaseDatos setup now') . "</strong></p>";
+                    echo "<br /><p><a href='?page=2'>" . $lang->word('continue') . "</a></p><br />";
+                } else {
+                    echo "<br /><p><strong>" . $lang->word('please correct errors') . "<strong></p><br />";
+                    echo "<p><strong>" . $lang->word('refresh page') . "</strong></p><br />";
+                    echo "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
+                }
+
+                // we need gd library and mbstring and php4+ and mysql 3.23+
+            } elseif ($page == 2) {
+                echo "<div id='log-form'>\n";
+                echo "<form name='iform' method='post'>\n";
+
+                // build the form here
+                echo "<label>" . $lang->word('exhibition name') . "</label><br />\n";
+                echo "<input type='text' name='n_site' value='" . showPosted('n_site') . "' maxlength='50' />\n";
+
+                echo "<label>" . $lang->word('database server') . "</label><br />\n";
+                echo "<input type='text' name='n_host' value='" . showPosted('n_host') . "' maxlength='50' />\n";
+
+                echo "<label>" . $lang->word('database name') . "</label><br />\n";
+                echo "<input type='text' name='n_name' value='" . showPosted('n_name') . "' maxlength='50' />\n";
+
+                echo "<label>" . $lang->word('database username') . "</label><br />\n";
+                echo "<input type='text' name='n_user' value='" . showPosted('n_user') . "' maxlength='50' />\n";
+
+                echo "<label>" . $lang->word('database password') . "</label><br />\n";
+                echo "<input type='password' name='n_pwd' value='" . showPosted('n_pwd') . "' maxlength='35' />\n";
+
+                echo "<input type='submit' name='n_submit' value='" . $lang->word('submit') . "' maxlength='50' /><br />\n";
+
+                echo "</form>\n";
+
+                if (isset($s)) echo $s;
+
+                echo "</div>\n";
+            } elseif ($page == 3) {
+                if ($_GET['s'] == 'success') {
+                    echo "<p><span class='ok'>OK</span> " . $lang->word('database is ready') . "</p>";
+
+                    echo "<p><strong>" . $lang->word('default login') . "</strong></p>";
+                    echo "<p>" . $lang->word('change settings') . "</p>";
+                    echo "<br /><p><a href='" . BASEURL . BASENAME . "/'>" . $lang->word('lets login') . "</a></p><br />";
+                    // let's get an edition number
+                    makeEdition();
+                } else {
+                    echo "<p><span class='ok-not'>XX</span> " . $lang->word('cannot install') . "</p><br />";
+                    echo "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
+                }
+            } else {
+                echo "<p class='red'>" . $lang->word('freak out') . "</p><br />";
+                echo "<p><small>" . $lang->word('goto forum') . "</small></p><br />";
+            }
+
+            ?>
+        </form>
+
+        <div class='cl'><!-- --></div>
+
+    </div>
+
+    <div id='footer' class='c2'>
+        <div class='col'><a href='<?php echo BASEURL . BASENAME ?>/license.txt'>License</a></div>
+        <div class='cl'><!-- --></div>
+    </div>
+
 </div>
 </body>
 </html>
