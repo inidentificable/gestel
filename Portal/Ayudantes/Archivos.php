@@ -10,15 +10,17 @@ class Archivos
 {
     function listarArchivos($directorioAListar)
     {
+        $devuelve = array();
+        $listar = null;
         $directorio = opendir($directorioAListar); //ruta a listar
-        $archivo = readdir($directorio);
-        foreach ($archivo as $leyendo) //obtenemos un archivo y luego otro sucesivamente
+        while ($elemento = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
         {
-            if (is_file($archivo)) //verificamos que no sea un directorio
+            if ($elemento != '.' && $elemento != '..' && !is_dir($directorioAListar . $elemento)) //verificamos que no sea un directorio
             {
-                $listadoArchivos = $archivo;
+                $devuelve[] = $directorioAListar . '/' . $elemento;
             }
         }
-        return $listadoArchivos;
+        closedir($directorio);
+        return $devuelve;
     }
 } 
