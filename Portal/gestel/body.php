@@ -15,6 +15,8 @@
  * Date: 18-10-14
  * Time: 11:49 PM
  */
+include_once("Motor/Interno/ControlUsuario/Usuario.php");
+$gestionUsuario = new Usuario();
 
 ?>
 
@@ -28,7 +30,7 @@
         <div align="center">
 
             <!-- <p align="right" class="button-style2"><a href="#">Regístrate&nbsp; </a></p> -->
-            <?php include("login.php"); ?>
+            <?php $gestionUsuario->imprimirSeccionLogin(); ?>
         </div>
         <!-- div container -->
     </div>

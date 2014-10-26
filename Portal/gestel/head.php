@@ -16,13 +16,9 @@
  * Time: 11:45 PM
  */
 
-include_once(AYUDANTES . "/Archivos.php");
+include_once(AYUDANTES . "/Vista.php");
 
-$listados = new Archivos();
-
-$listadoCss = (array)$listados->listarArchivos(CSS);
-$listadoJs = (array)$listados->listarArchivos(JS);
-$listadoLetras = (array)$listados->listarArchivos(LETRAS);
+$muestra = new Vista(CSS, JS, LETRAS);
 
 ?>
 <head>
@@ -31,35 +27,12 @@ $listadoLetras = (array)$listados->listarArchivos(LETRAS);
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="description" content="Sistema de Gestion Inmobiliaria"/>
     <meta name="keywords" content="inmobiliaria"/>
-
-    <!--  Seccion ingreso js -->
-
     <?php
-    $x = 0;
-    foreach ($listadoJs as $listando) {
-        echo '<script src="' . $listadoJs[$x] . '"></script>';
-        $x++;
-    }
-    ?>
 
-    <!--  Seccion ingreso css -->
+    $muestra->listarCss();
+    $muestra->listarJs();
+    $muestra->listarLetras();
 
-    <?php
-    $x = 0;
-    foreach ($listadoCss as $listando) {
-        echo '<link rel="stylesheet" type="text/css" href="' . $listadoCss[$x] . '" >';
-        $x++;
-    }
-    ?>
-
-    <!--  Seccion ingreso fonts -->
-
-    <?php
-    $x = 0;
-    foreach ($listadoLetras as $listando) {
-        echo '<link href="' . $listadoLetras[$x] . '" rel="stylesheet" type="text/css">';
-        $x++;
-    }
     ?>
 
 </head>
