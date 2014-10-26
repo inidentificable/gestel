@@ -5,55 +5,24 @@
 
 
 <?php
+echo '<nav id="nav">
+            <ul>
+                <li><a href="index.php">Inicio</a></li>
+			    <li><a href="empresa.php">La Empresa</a></li>
+			    <li><a href="propiedades.php">Propiedades</a></li>
+			    <li><a href="contacto.php">Cont&aacute;ctenos</a></li>';
+
 if (isset($_SESSION["perfil"])) {
     switch ($_SESSION["perfil"]) {
         case "Administrador" :
-            echo '
-                     <nav id="nav">
- 						<ul>
-							<li><a href="index.php">Inicio</a></li>
-							<li><a href="bien_admin.php">Configuraci&oacute;n</a></li>
-							<li><a href="empresa.php">La Empresa</a></li>
-							<li><a href="propiedades.php">Propiedades</a></li>					
-							<li><a href="contacto.php">Cont&aacute;ctenos</a></li>
-						</ul>
-					</div>';
-
+            echo '<li><a href="bien_admin.php">Configuraci&oacute;n</a></li>';
             break;
 
         case "Cliente-Proveedor":
-            echo '
-                     <nav id="nav">
- 						<ul>
-							<li><a href="index.php">Inicio</a></li>
-							<li><a href="bien_clipro.php">Configuraci&oacute;n</a></li>						
-							<li><a href="cargar_propiedad.php">Cargar Propiedades</a></li>
-							
-						</ul>
-						</div>';
+            echo '<li><a href="bien_clipro.php">Configuraci&oacute;n</a></li>
+                  <li><a href="cargar_propiedad.php">Cargar Propiedades</a></li>';
             break;
     }
-} else {
-    echo '
-                     <nav id="nav">
- 						<ul>
-							<li><a href="index.php">Inicio</a></li>
-							<li><a href="empresa.php">La Empresa</a></li>
-							<li><a href="propiedades.php">Propiedades</a></li>
-							<li><a href="contacto.php">Cont&aacute;ctenos</a></li>							
-						</ul>
-						</div>';
 }
-
-?>
-
-<?php /*?><nav id="nav">
-		<ul>
-			<li><a href="index.php">Inicio</a></li>
-			<li><a href="empresa.php">La Empresa</a></li>
-			<li><a href="propiedades.php">Propiedades</a></li>
-			<li><a href="contacto.php">Cont&aacute;ctenos</a></li>
-			
-		</ul>
-</nav><?php */
-?>
+echo '</ul>
+    </div>';

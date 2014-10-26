@@ -17,25 +17,13 @@
  * Time: 10:51 PM
  */
 
-namespace ControlUsuario;
-include_once("");
-
-
 class Usuario
 {
-    // Declaración de la propiedad
+// Declaración de la propiedad
     public $nombreUsuario;
     private $idEsAdministrador;
     private $claveUsuario;
     private $emailUsuario;
-
-    // Declaración del método
-    public function CrearUsuario()
-    {
-        public
-        Usuario $UsuarioNuevo;
-
-    }
 
     public function EliminarUsuario()
     {
@@ -88,4 +76,45 @@ class Usuario
         }
     }
 
-} 
+    public function imprimirSeccionLogin()
+    {
+        if (isset($_SESSION["usuario"])) {
+            echo ' Bienvenido ' . $_SESSION["usuario"] . ' ' . $_SESSION["perfil"];
+            echo '<a href="salir.php"> Cerrar Sesi&oacute;n </a> ';
+        } else {
+            echo '<form action="control.php" method="POST">
+            <table align="right" width="169" cellspacing="2" cellpadding="2" border="0" background="images/login.png">
+                <tr>
+                    <td colspan="2" align="center"';
+            if (isset($_GET["errorusuario"]) && $_GET["errorusuario"] == "si") {
+                echo '<span style="color:#ed1337"><b>Datos incorrectos</b></span>';
+            } else {
+                echo '<span class="Estilo2">Introduce tu clave de acceso </span>';
+            }
+            echo '</td>
+                </tr>
+                <tr>
+                    <td width="61" align="right">
+                        <div align="left" class="Estilo11">
+                            <div align="right"><span class="Estilo2">Usuario:</span></div>
+                        </div>
+                    </td>
+                    <td width="94"><input type="Text" name="usuario" size="8" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <div align="left" class="Estilo11">
+                            <div align="right"><span class="Estilo2">Clave</span>:</div>
+                        </div>
+                    </td>
+                    <td><input type="password" name="contrasena" size="8" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="Submit" value="ENTRAR"></td>
+                </tr>
+            </table>
+        </form>
+        </div>';
+        }
+    }
+}
