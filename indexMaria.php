@@ -22,9 +22,9 @@ define('ENTRADA', 'Adelante!');
 
 //Define las constantes generales del sistema
 
-define("ARCHIVOS", "/Archivos");
-define("MOTOR", "/Motor");
-define("PORTAL", "/Portal");
+define("ARCHIVOS", "Archivos");
+define("MOTOR", "Motor");
+define("PORTAL", "Portal");
 
 //Se incluyen los index de motor y portal para cargar el FRAMEWORK
 

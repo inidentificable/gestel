@@ -16,13 +16,13 @@
  * Time: 11:45 PM
  */
 
-include_once(LIBRERIA . "/Archivos.php");
+include_once(AYUDANTES . "/Archivos.php");
 
 $listados = new Archivos();
 
-$listadoCss = $listados->listarArchivos(CSS);
-$listadoJs = $listados->listarArchivos(JS);
-$listadoLetras = $listados->listarArchivos(LETRAS);
+$listadoCss = (array)$listados->listarArchivos(CSS);
+$listadoJs = (array)$listados->listarArchivos(JS);
+$listadoLetras = (array)$listados->listarArchivos(LETRAS);
 
 ?>
 <head>
@@ -35,24 +35,30 @@ $listadoLetras = $listados->listarArchivos(LETRAS);
     <!--  Seccion ingreso js -->
 
     <?php
+    $x = 0;
     foreach ($listadoJs as $listando) {
-        echo '<script src="' . JS . '/' . $listadoJs . '"></script>';
+        echo '<script src="' . $listadoJs[$x] . '"></script>';
+        $x++;
     }
     ?>
 
     <!--  Seccion ingreso css -->
 
     <?php
+    $x = 0;
     foreach ($listadoCss as $listando) {
-        echo '<link rel="stylesheet" href="' . CSS . '/' . $listadoCss . '" />';
+        echo '<link rel="stylesheet" type="text/css" href="' . $listadoCss[$x] . '" >';
+        $x++;
     }
     ?>
 
     <!--  Seccion ingreso fonts -->
 
     <?php
+    $x = 0;
     foreach ($listadoLetras as $listando) {
-        echo '<link href="' . LETRAS . ´ / ´ . $listadoLetras . '" rel="stylesheet" type="text/css">';
+        echo '<link href="' . $listadoLetras[$x] . '" rel="stylesheet" type="text/css">';
+        $x++;
     }
     ?>
 
