@@ -26,6 +26,10 @@ define("ARCHIVOS", "Archivos");
 define("MOTOR", "Motor");
 define("PORTAL", "Portal");
 
+//Se incluye la funcion que permite cargar clases y archivos
+
+include_once(PORTAL . '/Ayudantes/Archivos.php');
+
 //Se incluyen los index de motor y portal para cargar el FRAMEWORK
 
 include_once(MOTOR . "/index.php");

@@ -16,8 +16,6 @@
  * Time: 11:45 PM
  */
 
-include_once(AYUDANTES . "/Vista.php");
-
 $muestra = new Vista(CSS, JS, LETRAS);
 
 ?>

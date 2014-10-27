@@ -25,6 +25,14 @@ define("LIBRERIA", PORTAL . "/Libreria");
 define("MODULOS", PORTAL . "/Modulos");
 define("RECURSOS", PORTAL . "/Recursos");
 
+$cargaPortal = new Archivos();
+$cargaPortal->cargarArchivos(AYUDANTES);
+$cargaPortal->cargarArchivos(BASEDATOS);
+$cargaPortal->cargarArchivos(CONFIGURACION);
+$cargaPortal->cargarArchivos(LENGUAJE);
+$cargaPortal->cargarArchivos(LIBRERIA);
+$cargaPortal->cargarArchivos(MODULOS);
+
 include_once(GESTEL . "/index.php");
 
 ?>
