@@ -24,7 +24,7 @@ $gestionUsuario = new Usuario();
 <div id="header-wrapper">
     <div class="container">
         <div id="header">
-            <?php include("menu.php"); ?>
+            <?php $gestionUsuario->generarMenu(isset($_SESSION["perfil"]) ? $_SESSION["perfil"] : "Ninguno") ?>
         </div>
         <!--Div header -->
         <div align="center">
