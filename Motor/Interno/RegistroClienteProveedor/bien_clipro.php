@@ -3,9 +3,24 @@
 <html>
 
 <link rel="shortcut icon" href="http:favicon.ico">
-	<head>
+	<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style><head>
 		<title>GESTEL</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link href="http://fonts.googleapis.com/css?family=Oswald:400,300" rel="stylesheet" type="text/css" />
@@ -34,11 +49,12 @@
 		</br></br></br>
 			<div id="page">
 				<div class="container" align="center">
+				<div align="left"> Ud. se encuentra en: <a href="index.php">Inicio </a>&gt; <a href="#"> Inmuebles </a></div><br>
 					<table width="29%" border="1" align="center">
                                         <tr>
-                                          <td width="47%"><p><img src="images/ico15.png" alt="Ver Mi Inmueble" width="163" height="183"></p></td>
-                                          <td width="53%"><p><a href="ver_cliproveedor.php"></a></p></td>
-										  <td><a href="#"></a></td>
+                                          <td width="47%"><p><a href="ver_cliproveedor.php"><img src="images/ico15.png" width="173" height="213"></a></p></td>
+                                          <td width="53%"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></td>
+										  <td><a href="cargar_propiedad.php"><img src="images/ico22.png" width="173" height="213"></a></td>
                                         </tr>
                   </table>
 				</div>

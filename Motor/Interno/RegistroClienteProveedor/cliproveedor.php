@@ -1,20 +1,20 @@
 <?php include ("seguridad.php");
-
 include("funciones/setup.php");
+
 conecta_base();
-		  	
-if($id_clipro!="")
+
+if($id!="")
 {
-     $sql="select * from cliente where id_clipro=".$id_clipro;
-	 $resultado=mysql_query($sql);
-	 $registros=mysql_fetch_array($resultado);
-	 $fecha=fecha_es($registros['fecha']);
-	 $hora=hora($registros['hora']);
+     $sql_busqueda="select * from cliente where id_clipro=".$id;
+	 $resultado_busqueda=mysql_query($sql_busqueda);
+	 $registros_busqueda=mysql_fetch_array($resultado_busqueda); 
+	 $fecha=fecha_es($registros_busqueda['fecha_clipro']);
+	 $hora=$registros_busqueda['hora'];
 }
 else
 {
-    $fecha=fecha_hoy();
-	$hora=hora();
+   $fecha=fecha_hoy();
+   $hora=hora();
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -24,12 +24,24 @@ else
 <link rel="shortcut icon" href="http:favicon.ico">
 	<style type="text/css">
 <!--
-.Estilo1 {color: #000000}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+.Estilo2 {font-weight: bold}
 -->
     </style>
-	<head>
+<head>
 		<title>GESTEL</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link href="http://fonts.googleapis.com/css?family=Oswald:400,300" rel="stylesheet" type="text/css" />
@@ -47,72 +59,419 @@ else
 
 			function validar()
 			{
-			   if(document.form1.frm_rutclipro.value=="")
+			   if(document.form1.frm_cliusua.value=="")
 			   {
-				  alert("Debe Ingresar Rut");
-				  document.form1.frm_rutclipro.focus();
+				  alert("Debe Ingresar Usuario");
+				  document.form1.frm_cliusua.focus();
 				  return;
 			   }
-			   if(document.form1.frm_nomclipro.value=="")
+			   if(document.form1.frm_cliclave.value=="")
+			   {
+				  alert("Debe Ingresar Clave");
+				  document.form1.frm_cliclave.focus();
+				  return;
+			   }
+			   if(document.form1.frm_clirut.value=="")
+			   {
+				  alert("Debe Ingresar Rut");
+				  document.form1.frm_clirut.focus();
+				  return;
+			   }
+			   if(document.form1.frm_clinom.value=="")
 			   {
 				  alert("Debe Ingresar Nombre");
-				  document.form1.frm_nomclipro.focus();
+				  document.form1.frm_clinom.focus();
 				  return;
 			   }
 				
-			   if(document.form1.frm_apeclipro.value=="")
+			   if(document.form1.frm_cliape.value=="")
 			   {
 					alert("Debe Ingresar Apellido");
-					document.form1.frm_apeclipro.focus();
+					document.form1.frm_cliape.focus();
 				  return;
 			   }
-			   if(document.form1.select_seccli.value=="")
+			   if(document.form1.select.value=="")
 			   {
-					alert("Debe Ingresar Sexo");
-					document.form1.select_seccli.focus();
+					alert("Debe Ingresar Día");
+					document.form1.select.focus();
 				  return;
 			   }
 			
-				if(document.form1.select_estacli.value=="")
+				if(document.form1.select2.value=="")
 			   {
-				   alert("Debe Ingresar Esatdo Civil");
-				   document.form1.select_estacli.focus();
+				   alert("Debe Ingresar Mes");
+				   document.form1.select2.focus();
 				 return;
 			   }
-				 if(document.form1.frm_clave.value=="")
+				 if(document.form1.select3.value=="")
 			   {
-				   alert("Debe Ingresar Campos");
-				   document.form1.frm_clave.focus();
+				   alert("Debe Ingresar A&ntilde;o");
+				   document.form1.select3.focus();
 				  return;
 			   }
-			    if(document.form1.frm_usuario.value=="")
+			    if(document.form1.frm_cliemail.value=="")
 			   {
-				   alert("Debe Ingresar Usuario");
-				   document.form1.frm_usuario.focus();
+				   alert("Debe Ingresar Email");
+				   document.form1.frm_cliemail.focus();
 				  return;
 			   }
-			    if(document.form1.frm_clave.value=="")
+			    if(document.form1.frm_clidire.value=="")
 			   {
-				   alert("Debe Ingresar Clave");
-				   document.form1.frm_clave.focus();
+				   alert("Debe Ingresar Dirección");
+				   document.form1.frm_clidire.focus();
 				  return;
 			   }
-				 if(document.form1.frm_clave2.value=="")
+				 if(document.form1.frm_clitele.value=="")
 			   {
-				   alert("Debe Ingresar Campos");
-				   document.form1.frm_clave2.focus();
+				   alert("Debe Ingresar Teléfono");
+				   document.form1.frm_clitele.focus();
 				  return;
 			   }
-				 if(document.form1.userfile.value=="")
+			    if(document.form1.frm_cliciudad.value=="")
+			   {
+				   alert("Debe Ingresar Ciudad");
+				   document.form1.frm_cliciudad.focus();
+				  return;
+			   }
+				 if(document.form1.userfile2.value=="")
 			   {
 				   alert("Debe Adjuntar Documentación");
-				   document.form1.userfile.focus();
+				   document.form1.userfile2.focus();
 				  return;
 			   }
-				document.form1.accion.value = 'ingresar2';   
 			   document.form1.submit();
 			}
+				function valida_mail()
+			{
+					 
+					if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.form1.frm_cliemail.value))
+					{
+					   return;
+					}
+					else
+					{
+					   alert("La dirección de email no es Valida.");
+					   document.form1.frm_cliemail.value="";
+					   document.form1.frm_cliemail.focus();
+					   return;
+					}	
+			}
+	</script>
+	<script language="javascript">
+
+			function validacion_rut_usu(rut)
+			{
+			 var tmpstr = "";
+			 if (rut=="")
+				return;
+			 for ( i=0; i < rut.length; i++ )
+			   if ( rut.charAt(i) != ' ' && rut.charAt(i) != '.' && rut.charAt(i) != '-' )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 tmpstr = "";
+			 for ( i=0; rut.charAt(i) == '0' ; i++ );
+			   for (; i < rut.length; i++ )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 if ( largo < 2 )
+				  {
+					alert("Debe ingresar el rut Completo");
+					document.form1.frm_clirut.value = "";
+					document.form1.frm_clirut.focus();
+					return;
+				  }function validacion_rut_usu(rut)
+			{
+			 var tmpstr = "";
+			 if (rut=="")
+				return;
+			 for ( i=0; i < rut.length; i++ )
+			   if ( rut.charAt(i) != ' ' && rut.charAt(i) != '.' && rut.charAt(i) != '-' )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 tmpstr = "";
+			 for ( i=0; rut.charAt(i) == '0' ; i++ );
+			   for (; i < rut.length; i++ )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 if ( largo < 2 )
+				  {
+					alert("Debe ingresar el rut Completo");
+					document.form1.frm_clirut.value = "";
+					document.form1.frm_clirut.focus();
+					return;
+				  }
+			   for (i=0; i < largo ; i++ )
+				  {
+					if ( rut.charAt(i) != "0" && rut.charAt(i) != "1" && rut.charAt(i) !="2" && rut.charAt(i) != "3" && rut.charAt(i) != "4" && rut.charAt(i) !="5" && rut.charAt(i) != "6" && rut.charAt(i) != "7" && rut.charAt(i) !="8" && rut.charAt(i) != "9" && rut.charAt(i) !="k" && rut.charAt(i) != "K" )
+					  {
+						alert("El valor ingresado no Corresponde a un R.U.T valido.");
+						document.form1.frm_clirut.value = "";
+						document.form1.frm_clirut.focus();
+						return;
+					  }
+				 }
+			 var invertido = "";
+			 for ( i=(largo-1),j=0; i>=0; i--,j++ )
+				invertido = invertido + rut.charAt(i);
+			 var drut = "";
+			 drut = drut + invertido.charAt(0);
+			 drut = drut + '-';
+			 cnt = 0;
+			 for ( i=1,j=2; i<largo; i++,j++ )
+			   {
+				 if ( cnt == 3 )
+				 {
+				   drut = drut + '.';
+				   j++;
+				   drut = drut + invertido.charAt(i);
+				   cnt = 1;
+				 }
+				 else
+				 {
+				   drut = drut + invertido.charAt(i);
+				   cnt++;
+				 }
+			  }
+			invertido = "";
+			for ( i=(drut.length-1),j=0; i>=0; i--,j++ )
+			   invertido = invertido + drut.charAt(i);
+			document.form1.frm_clirut.value = invertido;
+			if ( validar_digito_usu(rut)==1 )
+			{
+				return;
+				
+			}
+			}
 			
+			function validar_digito_usu(crut)
+			{
+			 largo = crut.length;
+			 if ( largo < 2 )
+			   {
+				 alert("Debe ingresar el rut completo");
+				 document.form1.frm_clirut.value = "";
+				 document.form1.frm_clirut.focus();
+				 return;
+			   }
+			 if ( largo > 2 )
+			   rut = crut.substring(0, largo - 1);
+			 else
+			   rut = crut.charAt(0);
+			   dv = crut.charAt(largo-1);
+			   checkCDV_usu( dv );
+			 if ( rut == null || dv == null )
+			   return 0;
+			 var dvr = '0';
+			 suma = 0;
+			 mul = 2;
+			 for (i= rut.length -1 ; i >= 0; i--)
+			  {
+				suma = suma + rut.charAt(i) * mul;
+				if (mul == 7)
+				   mul = 2;
+				else
+				   mul++;
+						}
+				res = suma % 11;
+				if (res==1)
+				  dvr = 'k';
+				else if (res==0)
+				   dvr = '0';
+				else
+				 {
+				   dvi = 11-res;
+				   dvr = dvi + "";
+				 }
+				if ( dvr != dv.toLowerCase() )
+				{
+				  alert("EL RUT es Incorrecto. Verifique...");
+				  document.form1.frm_clirut.value = "";
+				  document.form1.frm_clirut.focus();
+				  return 1;
+				}
+			   return;
+			}
+			
+			function checkCDV_usu( dvr )
+			{
+			  dv = dvr + "";
+			  if ( dv != '0' && dv != '1' && dv != '2' && dv != '3' && dv != '4' && dv != '5' && dv != '6' && dv != '7' && dv != '8' && dv != '9' && dv != 'k'  && dv != 'K')
+				{
+				   alert("Debe ingresar un digito verificador valido.");
+				   document.form1.frm_clirut.value = "";
+				   document.form1.frm_clirut.focus();
+				   return;
+				}
+			  return;
+			}
+			function valida_mail()
+			{
+					 
+					if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.form1.frm_cliemail.value))
+					{
+					   return;
+					}
+					else
+					{
+					   alert("La dirección de email no es Valida.");
+					   document.form1.frm_cliemail.value="";
+					   document.form1.frm_cliemail.focus();
+					   return;
+					}	
+			}
+			function validacion_rut_usu(rut)
+			{
+			 var tmpstr = "";
+			 if (rut=="")
+				return;
+			 for ( i=0; i < rut.length; i++ )
+			   if ( rut.charAt(i) != ' ' && rut.charAt(i) != '.' && rut.charAt(i) != '-' )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 tmpstr = "";
+			 for ( i=0; rut.charAt(i) == '0' ; i++ );
+			   for (; i < rut.length; i++ )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 if ( largo < 2 )
+				  {
+					alert("Debe ingresar el rut Completo");
+					document.form1.frm_clirut.value = "";
+					document.form1.frm_clirut.focus();
+					return;
+				  }function validacion_rut_usu(rut)
+			{
+			 var tmpstr = "";
+			 if (rut=="")
+				return;
+			 for ( i=0; i < rut.length; i++ )
+			   if ( rut.charAt(i) != ' ' && rut.charAt(i) != '.' && rut.charAt(i) != '-' )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 tmpstr = "";
+			 for ( i=0; rut.charAt(i) == '0' ; i++ );
+			   for (; i < rut.length; i++ )
+				 tmpstr = tmpstr + rut.charAt(i);
+				 rut = tmpstr;
+				 largo = rut.length;
+				 if ( largo < 2 )
+				  {
+					alert("Debe ingresar el rut Completo");
+					document.form1.frm_clirut.value = "";
+					document.form1.frm_clirut.focus();
+					return;
+				  }
+			   for (i=0; i < largo ; i++ )
+				  {
+					if ( rut.charAt(i) != "0" && rut.charAt(i) != "1" && rut.charAt(i) !="2" && rut.charAt(i) != "3" && rut.charAt(i) != "4" && rut.charAt(i) !="5" && rut.charAt(i) != "6" && rut.charAt(i) != "7" && rut.charAt(i) !="8" && rut.charAt(i) != "9" && rut.charAt(i) !="k" && rut.charAt(i) != "K" )
+					  {
+						alert("El valor ingresado no Corresponde a un R.U.T valido.");
+						document.form1.frm_clirut.value = "";
+						document.form1.frm_clirut.focus();
+						return;
+					  }
+				 }
+			 var invertido = "";
+			 for ( i=(largo-1),j=0; i>=0; i--,j++ )
+				invertido = invertido + rut.charAt(i);
+			 var drut = "";
+			 drut = drut + invertido.charAt(0);
+			 drut = drut + '-';
+			 cnt = 0;
+			 for ( i=1,j=2; i<largo; i++,j++ )
+			   {
+				 if ( cnt == 3 )
+				 {
+				   drut = drut + '.';
+				   j++;
+				   drut = drut + invertido.charAt(i);
+				   cnt = 1;
+				 }
+				 else
+				 {
+				   drut = drut + invertido.charAt(i);
+				   cnt++;
+				 }
+			  }
+			invertido = "";
+			for ( i=(drut.length-1),j=0; i>=0; i--,j++ )
+			   invertido = invertido + drut.charAt(i);
+			document.form1.frm_clirut.value = invertido;
+			if ( validar_digito_usu(rut)==1 )
+			{
+				return;
+				
+			}
+			}
+			
+			function validar_digito_usu(crut)
+			{
+			 largo = crut.length;
+			 if ( largo < 2 )
+			   {
+				 alert("Debe ingresar el rut completo");
+				 document.form1.frm_clirut.value = "";
+				 document.form1.frm_clirut.focus();
+				 return;
+			   }
+			 if ( largo > 2 )
+			   rut = crut.substring(0, largo - 1);
+			 else
+			   rut = crut.charAt(0);
+			   dv = crut.charAt(largo-1);
+			   checkCDV_usu( dv );
+			 if ( rut == null || dv == null )
+			   return 0;
+			 var dvr = '0';
+			 suma = 0;
+			 mul = 2;
+			 for (i= rut.length -1 ; i >= 0; i--)
+			  {
+				suma = suma + rut.charAt(i) * mul;
+				if (mul == 7)
+				   mul = 2;
+				else
+				   mul++;
+						}
+				res = suma % 11;
+				if (res==1)
+				  dvr = 'k';
+				else if (res==0)
+				   dvr = '0';
+				else
+				 {
+				   dvi = 11-res;
+				   dvr = dvi + "";
+				 }
+				if ( dvr != dv.toLowerCase() )
+				{
+				  alert("EL RUT es Incorrecto. Verifique...");
+				  document.form1.frm_clirut.value = "";
+				  document.form1.frm_clirut.focus();
+				  return 1;
+				}
+			   return;
+			}
+			
+			function checkCDV_usu( dvr )
+			{
+			  dv = dvr + "";
+			  if ( dv != '0' && dv != '1' && dv != '2' && dv != '3' && dv != '4' && dv != '5' && dv != '6' && dv != '7' && dv != '8' && dv != '9' && dv != 'k'  && dv != 'K')
+				{
+				   alert("Debe ingresar un digito verificador valido.");
+				   document.form1.frm_clirut.value = "";
+				   document.form1.frm_clirut.focus();
+				   return;
+				}
+			  return;
+			}
 	</script>
 	</head>
 	<body>
@@ -130,276 +489,153 @@ else
 		</br></br></br>
 			<div id="page">
 				<div class="container" align="center">
-					<form id="form1" method="post" name="form1" action="registro_bd.php">
-  <div align="center"></div>
-  <center>
-		<table width="44%" border="0" align="center" cellpadding="4" cellspacing="4" background="../imagenes/fond.JPG">
-		  <tr>
-			<td colspan="2" align="center"><h2>Datos del Cliente Proveedor </h2></td>
-					  
-		  </tr>
-		  <tr>
-			<td width="27%"><span class="Estilo3">Id Cliente Proveedor </span></td>
-			<td width="73%"><label>
-			<input name="frm_id_clipro" type="text" id="frm_id_clipro" onBlur="validacion_id_clipro_usu(document.form1.frm_id_clipro.value)" maxlength="10"/>
-			  <input name="frm_id_oculto" type="hidden" id="frm_id_oculto" value="<?php echo $registros['id_clipro'];?>"/>
-			</label></td>
-		  </tr>
-		  <tr>
-			<td><div align="left" class="Estilo3">Rut</div></td>
-			<td><label>
-				<div align="left">
-				  <input name="frm_rutclipro" type="text" id="frm_rutclipro" />
-				</div>
-			  </label></td>
-		  </tr>
-		  <tr>
-			<td><div align="left" class="Estilo3">Nombre</div></td>
-			<td><label>
-				<div align="left">
-				  <input name="frm_nomclipro" type="text" id="frm_nomclipro" onBlur="validacion_id_clipro(document.form1.frm_id_clipro.value)"/>
-				</div>
-			  </label></td>
-		  </tr>
-		  <tr>
-			<td><div align="left" class="Estilo3">Apellidos</div></td>
-			<td><label>
-				<div align="left">
-				  <input name="frm_apeclipro" type="text" id="frm_apeclipro" onBlur="validacion_id_clipro(document.form1.frm_id_clipro.value)"/>
-				</div>
-			  </label></td>
-		  </tr>
-		  <tr>
-			<td><div align="left" class="Estilo3">Sexo</div></td>
-			<td><label>
-				<div align="left">
-				  <select name="select_sexcli" id="select_sexcli" onChange="combo();">
-                    <option value="0">..::Seleccione::..</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Masculino">Masculino</option>
-                    <?php /*?>	<?php
-				$sql="SELECT id_clipro,ape_clipro FROM ape_clipro"; 
-				$consulta=mysql_query($sql,$conn);
-			
-			 while($row=mysql_fetch_array($consulta)){
-				   ?>
-			<option value="<?php echo $row['id_clipro']; ?>"><?php echo $row['ape_clipro']; ?>		</option>
-				
-				<?php } ?><?php */?>
-                  </select>
-				</div>
-			  </label></td>
-		  </tr>
+				<div align="left"> Ud. se encuentra en: <a href="index.php">Inicio </a>&gt; <a href="bien_admin.php"> Acceso a M&oacute;dulos </a>&gt; <a href="ver_cliproveedor.php"> Módulo Cliente Proveedor</a> &gt;<a href="#"> Ingreso </a></div><br />
+				  <h2><strong>Ingreso de Cliente Proveedor</strong></h2>
+				  </br></br>
+				  <form id="form1" name="form1" method="post" action="ProcesaFormularioClientes.php" enctype="multipart/form-data">
+ <table cellpadding="4" cellspacing="0" border="0" align="center">
+   <tr>
+     <td><fieldset>
+       <legend>Identificaci&oacute;n de usuario:</legend><br />
+       <table cellpadding="4" cellspacing="0" border="0" width="100%">
+         <tr>
+		  <td>Id Cliente </td>
+          <td colspan="3"><label>
+            <input name="frm_id_clipro" type="text" id="frm_id_clipro" size="10" disabled="disabled" value="<?php echo $registros_busqueda['id_clipro'];?>"/>
+            <input name="frm_id_oculto" type="hidden" id="frm_id_oculto" value="<?php echo $registros_busqueda['id_clipro'];?>"/>
+          </label></td>
+           <td style="text-align: right;">Nombre usuario:</td>
+           <td><input name="frm_cliusua" type="text" class="campo_form" id="frm_cliusua" value="<? if ($editando) echo $dato["usuario_clipro"]?>" /></td>
+           <td style="text-align: right;">Contrase&ntilde;a:</td>
+           <td><input name="frm_cliclave" type="password" class="campo_form" id="frm_cliclave" value="<? if ($editando) echo $dato["clave_clipro"]?>" /></td>
+         </tr>
+       </table><br />
+       </fieldset>
+         <fieldset>
+         <legend>Identificaci&oacute;n de persona:</legend><br />
+           <table cellpadding="4" cellspacing="0" border="0" width="100%">
+           <tr>
+             <td width="12%" style="text-align: right;">RUT:</td>
+             <td width="46%"><input name="frm_clirut" type="text" class="campo_form" id="frm_clirut" onBlur="validacion_rut_usu(document.form1.frm_clirut.value)"/></td>
+             <td colspan="2">&nbsp;</td>
+           </tr>
+           <tr>
+             <td style="text-align: right;">Nombre:</td>
+             <td><input name="frm_clinom" type="text" class="campo_form" id="frm_clinom" /></td>
+             <td width="19%" style="text-align: right;">Apellido:</td>
+             <td width="23%"><input name="frm_cliape" type="text" class="campo_form" id="frm_cliape" /></td>
+           </tr>
+           <tr>
+             <td style="text-align: right;">Fecha Nac.</td>
+             <td colspan="2"><select name="select" id="select">
+               <option value="0">..::Seleccionar::..</option>
+               <?php
+							  
+							   for($i=1;$i<=31;$i++)
+							   {
+							   
+							   ?>
+               <option value="<?php echo $i;?>"><?php echo $i;?></option>
+               <?php 
+							   }
+							  
+							  ?>
+             </select>
+               <select name="select2" id="select2">
+                 <option value="0">..::Seleccionar::..</option>
+                 <?php
+							  
+							   for($i=1;$i<=12;$i++)
+							   {
+							   
+							   ?>
+                 <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                 <?php 
+							   }
+							  
+							  ?>
+               </select>
+               <select name="select3" id="select3">
+                 <option value="0">..::Seleccionar::..</option>
+                 <?php
+							  
+							   for($i=2012;$i>=1940;$i--)
+							   {
+							   
+							   ?>
+                 <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                 <?php 
+							   }
+							  
+							  ?>
+               </select></td>
+             <td>&nbsp;</td>
+           </tr>
+         </table><br />
+           </fieldset>
+       <fieldset>
+         <legend>Contacto:</legend><br />
+         <table cellpadding="4" cellspacing="0" border="0" width="100%">
+           <tr>
+             <td width="49%" style="text-align: right;">E-mail:</td>
+             <td width="23%"><input name="frm_cliemail" type="text" id="frm_cliemail" class="campo_form" onBlur="valida_mail(document.form1.frm_cliemail.value)"/></td>
+			 <td width="9%" style="text-align: right;">Dirección:</td>
+			 <td width="19%"><input name="frm_clidire" type="text" class="campo_form" id="frm_clidire" /></td>
+           </tr>
+           <tr>
+             <td style="text-align: right;">Teléfono:</td>
+             <td><input name="frm_clitele" type="text" class="campo_form" id="frm_clitele" /></td>
+			 <td style="text-align: right;">Ciudad:</td>
+			 <td><input name="frm_cliciudad" type="text" class="campo_form" id="frm_cliciudad"/></td>
+           </tr>
+           <tr>
+             <td style="text-align: right;">Estado:</td>
+             <td></td>
+             <td style="text-align: right;">Fecha:</td>
+             <td><input name="txt_fecha2" type="text" id="txt_fecha2" size="20" disabled="disabled" value="<?php echo $fecha;?>"/></td>
+           </tr>
 		   <tr>
-			<td><div align="left" class="Estilo3">Estado Civil </div></td>
-			<td><label>
-				<div align="left">
-				  <select name="select_estacli" id="select_estacli" onChange="combo();">
-                    <option value="0">..::Seleccione::..</option>
-                    <option value="Soltero">Soltero</option>
-                    <option value="Casado">Casado</option> 
-					<option value="Viudo">Viudo</option>
-                    <option value="Divorciado">Divorciado</option>
-                    <?php /*?>	<?php
-				$sql="SELECT id_clipro,ape_clipro FROM ape_clipro"; 
-				$consulta=mysql_query($sql,$conn);
-			
-			 while($row=mysql_fetch_array($consulta)){
-				   ?>
-			<option value="<?php echo $row['id_clipro']; ?>"><?php echo $row['ape_clipro']; ?>		</option>
+		     <td style="text-align: right;">Adjuntar Documentos </td>
+		     <td><input name="userfile2" type="file" class="cajatexto1" onchange="muestra();" size="16" style="float: left" /></td>
+		     <td><input type="hidden" name="MAX_FILE_SIZE2" value="100000" /></td>
+		     <td></td>
+			 <tr>			 </tr>
+			 <tr>
+			   <td>&nbsp;</td>
+			   <td>&nbsp;</td>
+			   <td>&nbsp;</td>
+			   <td>&nbsp;</td>
+			   </tr>
+			 <tr>
+		     <td>
+				  <input type="button" name="Submit" value="Ingresar" onClick="validar()"/>
+                </td>
+				<?php
 				
-				<?php } ?><?php */?>
-                  </select>
-				</div>
-			  </label></td>
-		  </tr>
-		  <tr>
-		    <td><div align="left" class="Estilo3">Usuario</div></td>
-		    <td><label>
-                <div align="left">
-                  <input name="frm_usuario" type="text" id="frm_usuario" size="15" />
+				if($id!="")
+				{
+				?>
+                <td><label>
+                  <input name="eliminar" type="submit" id="eliminar" value="Eliminar" />
+                  <input name="cancelar2" type="submit" id="cancelar2" value="Cancelar" />
+                </label></td>
+				<?php
+				}
+				?>
+                <td><label>
+                  <input type="reset" name="Submit22" value="Limpiar" />
+                </label></td>
+				<td>&nbsp;</td>
+			</tr>
+         </table>
+       </fieldset></td>
+     <td style="width: 100px; text-align: right; vertical-align: top;">&nbsp;</td>
+   </tr>
+ </table>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+				  </form>
                 </div>
-		      </label></td>
-			</tr>
-		  <tr>
-		    <td><div align="left" class="Estilo3">Contrase&ntilde;a</div></td>
-		    <td><label>
-                <div align="left">
-                  <input name="frm_clave" type="password" id="frm_clave" size="15" />
-                </div>
-		      </label></td>
-			</tr>
-		  <tr>
-			<td><div align="left" class="Estilo3">Repetir Contrase&ntilde;a </div></td>
-			<td><label>
-				<div align="left">
-				  <input name="frm_clave2" type="password" id="frm_clave2" size="15" />
-				</div>
-			  </label></td>
-		  </tr>
-		<tr>
-		  		<td>Adjuntar Documentos</td>
-			  <td width="81%">
-					<input name="userfile" type="file" class="cajatexto1" onChange="muestra();" size="16" style="float: left">
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-			  </td>
-				<?php if ($_GET["errorimagen"]=="si")
-					 {
-					 ?> 
-					   bgcolor=red><span style="color:ffffff"><b>Error al subir la imagen</b></span> 
-			   <?php }else{if ($_GET["errorimagen"]=="no"){?>
-					  bgcolor=#cccccc><span style="color:ffffff"><b>Imagen ingresada </b></span>  
-				<?php }}?>
-			</tr>
-		  <tr>
-			<td><span class="Estilo3">Fecha</span></td>
-			<td><input name="frm_fecha" type="text" id="frm_fecha" size="20" disabled="disabled" value="<?php echo $fecha;?>"/></td>
-		  </tr>
-		  <tr>
-			<td colspan="2" 
-		  
-		  <?php if (isset($_GET["errorregistro"])){
-					if($_GET["errorregistro"]=="si"){
-						?> 
-						 bgcolor="red"><span style="color:ffffff"><b>Datos incorrectos</b></span>
-				<?php    }else{?>
-			  bgcolor=#cccccc&gt; datos guardados con exito
-			  <?php    }
-					}     ?>
-			  <div align="center">
-				<table border="0" align="center" cellpadding="0" cellspacing="5">
-				  <tr>
-					<td><label>
-					  <input name="<?php if($id_clipro==""){?>ingresar<?php }else{?>modificar<?php }?>" type="button" id="ingresar2" value="<?php if($id_clipro==""){?>Ingresar<?php }else{?>Modificar<?php }?>" onClick="validar()" />
-					</label></td>
-					<?php
-			  if($id_clipro!="")
-			  {
-			  ?>
-					<td><input name="eliminar2" type="submit" id="eliminar2" value="Eliminar" /></td>
-					<?
-			  }
-			  ?>
-					<td><input name="cancelar2" type="submit" id="cancelar2" value="Cancelar" /></td>
-				  </tr>
-				</table>
-				</div></td>
-		  </tr>
-		</table>
-		<p><?php
-		$id_clipro=$_POST["id_clipro"];
-		$rut_clipro=$_POST["rut_clipro"];
-		$nom_clipro=$_POST["nom_clipro"];
-		$ape_clipro=$_POST["ape_clipro"];
-		$sexo_clipro=$_POST["sexo_clipro"];
-		$estado_clipro=$_POST["estado_clipro"];
-		$usuario_clipro=$_POST["usuario_clipro"];
-		$contras_clipro=$_POST["contras_clipro"];
-		$fecha_clipro=$_POST["fecha_clipro"];
-	
-	if ($id_clipro !="" && $rut_clipro !="" && $nom_clipro !="" && $ape_clipro!="" && $sexo_clipro !="" && $estado_clipro!="" && $usuario_clipro!=""&& $contras_clipro!=""&& $fecha_clipro!=""){
-		$sql="select * from cliente where id_clipro='".$id_clipro."'";
-		$result=mysql_query($sql);
-		
-		if($row=mysql_fetch_array($result)) {
-			echo "El cliente con el id_clipro ".$id_clipro." ya se encuentra ingresado.";
-		}else{
-			
-			$sql="insert into cliente (id_clipro, rut_clipro, nom_clipro, ape_clipro, sexo_clipro, estado_clipro, usuario_clipro, contras_clipro, fecha_clipro) values ('$id_clipro','$rut_clipro','$nom_clipro','$ape_clipro','$sexo_clipro','$estado_clipro', '$usuario_clipro','$contras_clipro','$fecha_clipro')";
-			$result=mysql_query($sql);
-			echo "Se ha ingresado al Cliente Proveedor.";
-		}
-	
-	
-	$sql="select * from cliente where id_clipro='".$id_clipro."'";
-	$result=mysql_query($sql);
-				if($row=mysql_fetch_array($result)){
-				echo "<table width=80% border=0 align=center >";
-				echo "<th>Id Cliente Proveedor</th>";
-				echo "<th>Rut Cliente</th>";
-				echo "<th>Nombre</th>";
-				echo "<th>Apellidos</th>";
-				echo "<th>Sexo</th>";
-				echo "<th>Estado</th>";
-				echo "<th>Usuario</th>";
-				echo "<th>Contrase&ntilde;a</th>";			
-				echo "<th>Fecha</th>";
-				do{
-					echo "<tr>";
-					echo "<td>",$row["id_clipro"],"</td>";
-					echo "<td>",$row["rut_clipro"],"</td>";
-					echo "<td>",$row["nom_clipro"],"</td>";
-					echo "<td>",$row["ape_clipro"],"</td>";
-					echo "<td>",$row["sexo_clipro"],"</td>";
-					echo "<td>",$row["estado_clipro"],"</td>";
-					echo "<td>",$row["usuario_clipro"],"</td>";
-					echo "<td>",$row["contras_clipro"],"</td>";	
-					echo "<td>",$row["fecha_clipro"],"</td>","<br>";
-					echo "</tr>";
-					
-				}while($row=mysql_fetch_array($result));
-				echo"</table>";
-			}
-	}
-	?>
-		</p>
-		</center>
-	</form>
-	<p>&nbsp;</p>
-	<p>
-	  <?php
-			$_pagi_sql= "SELECT * FROM cliente ";
-					
-			$_pagi_cuantos = 5;
-			include("funciones/paginator.inc.php");
-	?>
-	</p>
-	<table width="89%" border="0" align="center" cellpadding="0" cellspacing="2" bordercolor="#0033FF">
-	  <tr bgcolor="#0e99b5">
-		<td><div align="center" class="Estilo1">Id Cliente Proveedor</div></td>
-		<td><div align="center" class="Estilo1">Rut Cliente</div></td>
-		<td><div align="center" class="Estilo1">Nombre</div></td>
-		<td><div align="center" class="Estilo1">Apellidos</div></td>
-		<td><div align="center" class="Estilo1">Sexo</div></td>
-		<td><div align="center" class="Estilo1">Estado</div></td>
-		<td><div align="center" class="Estilo1">Usuario</div></td>
-		<td><div align="center" class="Estilo1">Contrase&ntilde;a</div></td>
-		<td><div align="center" class="Estilo1">Fecha</div></td>
-		<td><div align="center" class="Estilo1">Acción</div></td>		
-	  </tr>
-	  <?php
-	  while($row_todas=mysql_fetch_array($_pagi_result))
-	  {  
-		  if($sw==1)
-		  {
-			  $color="#08c2bc";
-			  $sw=0;
-		  }
-		  else
-		  {
-			  $color="#0de3dc";
-			  $sw=1;
-		  }
-	  ?>
-	  <tr bgcolor="<?php echo $color;?>">
-		<td><div align="center" class="Estilo1"><?php echo $row_todas['id_clipro'];?></div></td>
-		<td><div align="center" class="Estilo1"><?php echo $row_todas['rut_clipro'];?></div></td>
-		<td><div align="center" class="Estilo1"><?php echo $row_todas['nom_clipro'];?></div></td>
-		<td><span class="Estilo1"><?php echo $row_todas['ape_clipro'];?></span></td>
-		<td><div align="center" class="Estilo1"><?php echo $row_todas['sexo_clipro'];?></div></td>
-		<td><div align="center" class="Estilo1"><?php echo $row_todas['estado_clipro'];?></div></td>		
-		<td><div align="center" class="Estilo1"><?php echo $row_todas['usuario_clipro'];?></div></td>
-		<td align="justify"><div align="center" class="Estilo1"><?php echo $row_todas['contras_clipro'];?></div></td>		
-		<td><div align="center" class="Estilo1"><?php echo $row_todas['fecha_clipro'];?></div></td>
-		<td><div align="center"><a href="cliproveedor.php?id_clipro=<?php echo $row_todas['id_clipro'];?>"><img src="images/modificar.gif"  alt="Modificar" width="20" height="20" border="0" /></a><a href="registro_bd.php?id_clipro=<?php echo $row_todas['id_clipro'];?>&amp;eliminar=1"><img src="images/eliminar.gif" alt="Eliminar" width="20" height="20"></a></div></td>
-	  </tr>
-	  
-	  <?php }?>
-	  <tr bgcolor="#0c849c">
-		<td height="20" colspan="11"><div align="center"><span class="Estilo3"><?php echo $_pagi_navegacion;?></span></div></td>
-	  </tr>
-	</table>
-				</div>
 			</div>
 		</div>
 		<?php include("container.php"); ?>

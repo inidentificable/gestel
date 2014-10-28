@@ -163,7 +163,7 @@ jQuery(document).ready(function ($) {
 				function ScaleSlider() {
 					var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
 					if (parentWidth)
-						jssor_slider1.$ScaleWidth(Math.min(parentWidth, 600));
+						jssor_slider1.$ScaleWidth(Math.min(parentWidth, 650));
 					else
 						window.setTimeout(ScaleSlider, 30);
 				}

@@ -1,11 +1,26 @@
 <?php include ("seguridad.php");?> 
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <link rel="shortcut icon" href="http:favicon.ico">
-	<head>
+	<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+    </style><head>
 		<title>GESTEL</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link href="http://fonts.googleapis.com/css?family=Oswald:400,300" rel="stylesheet" type="text/css" />
@@ -32,23 +47,36 @@
 		</div> <!-- div header-wrapper --> 
 		<div id="wrapper">
 		</br></br></br>
+			<h2 align="center"><strong>Módulos GESTEL</strong></h2>
 			<div id="page">
 				<div class="container" align="center">
-					<table width="29%" border="1" align="center">
-                                        <tr>
-                                          <td width="47%"><p><a href="ver_inmuebles.php"><img src="images/ico08.png" alt="" width="173" height="213"></a></p></td>
-                                          <td width="53%"><p><a href="ver_cliproveedor.php"><img src="images/ico09.png" alt="" width="173" height="213" border="0"></a></p></td>
-										  <td><a href="#"><img src="images/ico11.png" width="173" height="213"></a></td>
-                                        </tr>
-                                        <tr>
-                                          <td><p><a href="#"><img src="images/ico12.png" width="173" height="213"></a></p></td>
-										  <td><p><a href="#"><img src="images/ico10.png" width="173" height="213"></a></p></td>
-										  <td>&nbsp;</td>
-                                        </tr>
-                  </table>
+					<div class="row divider">
+					<div align="center">
+					<div align="left"> Ud. se encuentra en: <a href="index.php">Inicio </a>&gt; <a href="#"> Acceso a M&oacute;dulos </a></div>
+					<br>
+					<table width="44%" border="1" align="center" cellspacing="10">
+					  <tr>
+						<td width="23%"><a href="ver_cliproveedor.php"><img src="images/ico09.png" alt="" width="173" height="213"></a></td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td><div align="center"><a href="#"><img src="images/ico10.png" width="173" height="213"></a></div></td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td width="24%"><a href="ver_inmuebles.php"><img src="images/ico08.png" alt="" width="173" height="213"></a></td>
+					  </tr>
+					  <tr>
+					  	<td colspan="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>						
+					  </tr>
+					  <tr>
+						<td width="53%"><a href="#"><img src="images/ico11.png" width="173" height="213"></a></td>
+						<td></td>
+						<td><div align="center"><a href="#"><img src="images/ico12.png" width="173" height="213"></a></div></td>
+						<td><div align="center"></div></td>
+					  </tr>
+					</table><br></div>
+					
+				</div><!-- div row divider -->
 				</div>
 			</div>
-		</div>
+	</div>
 		<?php include("container.php"); ?>
 		<?php include("footer.php"); ?>
 	</body>

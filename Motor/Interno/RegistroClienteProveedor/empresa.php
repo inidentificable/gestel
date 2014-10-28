@@ -35,7 +35,7 @@
 						<div class="12u">
 							<section>
 								<div class="post">
-									<h2 align="center">Nuestra Historia </h2>
+									<h2 align="center"><strong>Nuestra Historia </strong></h2>
 									<p>&nbsp; &nbsp;<strong>GESTEL</strong>  tiene 5 años de presencia en el mercado y cuenta con la experiencia de promover  propiedades de personas y empresas. Cuenta con una variada oferta de  propiedades, las cuales van desde terrenos (parcelas de agrado), casas,  departamentos, oficinas, bodegas, etc…<br>
 									  </br>
 La permanente  preocupación por la calidad de nuestro servicio junto a la gran dedicación y  profesionalismo de nuestro equipo. Nuestra experiencia en el rubro es el valor  agregado de nuestro negocio, sabemos elegir la mejor solución para nuestros  clientes entregando rentabilidad a todas nuestras transacciones como objetivo  principal.<br><br>

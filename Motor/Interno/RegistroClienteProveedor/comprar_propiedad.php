@@ -45,7 +45,7 @@
 								<section>
 									<div class="post"><br><br>
 										<br>
-										<h2 align="center">¿Cómo comprar una Propiedad? </h2>
+										<h2 align="center"><strong>¿Cómo comprar una Propiedad? </strong></h2>
 										<p><img src='images/ico01.png'><br>
 									  </p>
 										<h2 align="center" class="Estilo1">Consejos</h2><br>

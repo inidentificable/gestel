@@ -22,7 +22,25 @@ if (mysql_num_rows($array)==1){
 	$_SESSION["usuario"]=$usuario; 
 	$_SESSION["perfil"]=$perfil;
 	$_SESSION["rut"]=$rut;
-    header ("Location: index.php"); 
+	
+	if(isset($_SESSION["perfil"])){
+  		switch ( $_SESSION["perfil"] )
+           {
+		        case "Administrador" :
+			   			 header ("Location: bien_admin.php");
+		          	break;
+				case "Cliente-Proveedor" :
+			   			 header ("Location: bien_clipro.php");
+		          	break;
+			}
+	}
+	/*if($_SESSION["perfil"]=="Administrador"){
+            
+	}else{
+	       header ("Location: index.php");
+	}  */ 
+	
+	
 }else { 
        header("Location: index.php?errorusuario=si"); 
 } 

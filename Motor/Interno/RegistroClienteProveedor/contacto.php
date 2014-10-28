@@ -3,7 +3,7 @@
 <html>
 
 <link rel="shortcut icon" href="http:favicon.ico">
-	<head>
+<head>
 		<title>GESTEL</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
@@ -86,7 +86,7 @@ function valida_mail()
 					  <div class="9u skel-cell-important" id="content">
 							<section>
 								<div class="post">
-									<h2 align="center">Contáctenos</h2>
+									<h2 align="center"><strong>Contáctenos</strong></h2>
 									  <?php
         if (!$_POST){
       ?>
@@ -115,7 +115,10 @@ function valida_mail()
                   <td><textarea name="coment" id="coment" cols="52" rows="8"></textarea></td>
                 </tr>
                 <tr>
-                  <td><input type="button" name="Submit" value="Enviar" onClick="validar();" /></td>
+                  <td><input type="button" name="Submit" value="Enviar" onClick="validar();" />
+                    <label>
+                    <input name="Limpiar" type="reset" class="botones" id="Limpiar" value="Limpiar">
+                    </label></td>
                 </tr>
               </table>
             </form>
@@ -128,7 +131,7 @@ function valida_mail()
 				$cuerpo .= "<strong>Email: </strong><a href='mailto:" . $_POST["email"] . "'>". $_POST["email"] ."</a><br />";
 				$cuerpo .= "<strong>Motivo: </strong>" . $_POST["motivo"] . "<br />";
 			   			   				
-		  		$email = "cvaldivia@clinicaatacama.cl";		   				
+		  		$email = "maria.carvajal15@inacapmail.cl";		   				
 				$cuerpo .= "<br /><strong>Comentarios:</strong><br />" . $_POST["coment"] . "<br /><br /></body>";
 		
 				$headers = "MIME-Version: 1.0\r\n";
@@ -136,7 +139,7 @@ function valida_mail()
 				$headers .= "From: ".$_POST["nombre"]." <".$_POST["email"].">";
 				
 				
-		 		$email = "mcarvajal@diagnosticoatacama.cl";
+		 		$email = "m.carvajal.carvajal@gmail.com";
 				
 		   	    mail($email,"Solicitud recibida desde pagina web",utf8_decode($cuerpo),$headers);
 				echo "Los datos se han enviado correctamente.<br/>Pronto responderemos a su solicitud.";
