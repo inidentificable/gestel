@@ -20,18 +20,12 @@ define("AYUDANTES", PORTAL . "/Ayudantes");
 define("BASEDATOS", PORTAL . "/BaseDatos");
 define("CONFIGURACION", PORTAL . "/Configuracion");
 define("GESTEL", PORTAL . "/Gestel");
-define("LENGUAJE", PORTAL . "/Lenguaje");
-define("LIBRERIA", PORTAL . "/Libreria");
-define("MODULOS", PORTAL . "/Modulos");
 define("RECURSOS", PORTAL . "/Recursos");
 
 $cargaPortal = new Archivos();
 $cargaPortal->cargarArchivos(AYUDANTES);
 $cargaPortal->cargarArchivos(BASEDATOS);
-$cargaPortal->cargarArchivos(CONFIGURACION);
-$cargaPortal->cargarArchivos(LENGUAJE);
-$cargaPortal->cargarArchivos(LIBRERIA);
-$cargaPortal->cargarArchivos(MODULOS);
+//$cargaPortal->cargarArchivos(CONFIGURACION);
 
 include_once(GESTEL . "/index.php");
 

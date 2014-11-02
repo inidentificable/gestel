@@ -19,12 +19,20 @@
 $muestra = new Vista(CSS, JS, LETRAS);
 
 ?>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>GESTEL</title>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="gestel">
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="description" content="Sistema de Gestion Inmobiliaria"/>
     <meta name="keywords" content="inmobiliaria"/>
+
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>GESTEL</title>
     <?php
 
     $muestra->listarCss();

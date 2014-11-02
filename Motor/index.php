@@ -4,6 +4,6 @@ define('INTERNO', MOTOR . '/Interno');
 define('EXTERNO', MOTOR . '/Externo');
 
 include_once(INTERNO . '/index.php');
-include_once(EXTERNO . '/index.php');
+//include_once(EXTERNO . '/index.php');
 
 ?>

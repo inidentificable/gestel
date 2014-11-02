@@ -16,10 +16,6 @@
  * Date: 11-10-14
  * Time: 04:35 PM
  */
-
-namespace ControlDatos;
-
-
 class Helper
 {
     function crearBotonBuscar()

@@ -16,10 +16,6 @@
  * Date: 11-10-14
  * Time: 03:07 PM
  */
-
-namespace ControlDatos;
-
-
 class Multimedia
 {
     function imagen($archivo)

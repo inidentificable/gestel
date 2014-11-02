@@ -16,10 +16,6 @@
  * Date: 11-10-14
  * Time: 03:05 PM
  */
-
-namespace ControlDatos;
-
-
 class Fechas
 {
     function fecha_hoy()

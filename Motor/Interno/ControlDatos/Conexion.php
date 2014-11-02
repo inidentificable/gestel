@@ -16,9 +16,6 @@
  * Date: 30-09-14
  * Time: 11:12 PM
  */
-
-namespace ControlDatos;
-
 class Conexion
 {
     function conecta_base()

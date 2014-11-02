@@ -81,47 +81,47 @@ class Usuario
             echo ' Bienvenido ' . $_SESSION["usuario"] . ' ' . $_SESSION["perfil"];
             echo '<a href="salir.php"> Cerrar Sesi&oacute;n </a> ';
         } else {
-            echo '<form action="control.php" method="POST">
-            <table align="right" width="169" cellspacing="2" cellpadding="2" border="0" background="images/login.png">
-                <tr>
-                    <td colspan="2" align="center"';
+            echo '<form class="navbar-form navbar-right" role="form">
+            <div class="form-group">';
             if (isset($_GET["errorusuario"]) && $_GET["errorusuario"] == "si") {
                 echo '<span style="color:#ed1337"><b>Datos incorrectos</b></span>';
             } else {
                 echo '<span class="Estilo2">Introduce tu clave de acceso </span>';
             }
-            echo '</td>
-                </tr>
-                <tr>
-                    <td width="61" align="right">
-                        <div align="left" class="Estilo11">
-                            <div align="right"><span class="Estilo2">Usuario:</span></div>
-                        </div>
-                    </td>
-                    <td width="94"><input type="Text" name="usuario" size="8" maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td align="right">
-                        <div align="left" class="Estilo11">
-                            <div align="right"><span class="Estilo2">Clave</span>:</div>
-                        </div>
-                    </td>
-                    <td><input type="password" name="contrasena" size="8" maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center"><input type="Submit" value="ENTRAR"></td>
-                </tr>
-            </table>
-        </form>
-        </div>';
+            echo '
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>';
         }
     }
 
     public function generarMenu($perfil)
     {
-        echo '<br><div id="logo"><h1><img src="images/logo.png" alt="24" width="166" height="151"></h1></div> <!-- div logo -->
-        <nav id="nav">
-            <ul>
+        echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+
+
                 <li><a href="index.php">Inicio</a></li>
 			    <li><a href="empresa.php">La Empresa</a></li>
 			    <li><a href="propiedades.php">Propiedades</a></li>
@@ -137,6 +137,14 @@ class Usuario
                 break;
         }
         echo '</ul>
-              </nav>';
+                </li>
+            </ul>';
+        $this->imprimirSeccionLogin();
+        echo '</div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+<br><div id="logo"><h1><img src="images/logo.png" alt="24" width="166" height="151"></h1></div> <!-- div logo -->';
+
     }
 }

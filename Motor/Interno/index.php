@@ -8,10 +8,10 @@ define('REGISTROPROPIEDAD', INTERNO . '/RegistroPropiedad');
 define('VENTAS', INTERNO . '/Ventas');
 
 $cargarInterno = new Archivos();
-$cargarInterno->listarArchivos(CONTROLDATOS);
-$cargarInterno->listarArchivos(CONTROLUBICACION);
-$cargarInterno->listarArchivos(CONTROLUSUARIO);
-$cargarInterno->listarArchivos(REGISTROPROPIEDAD);
-$cargarInterno->listarArchivos(VENTAS);
+$cargarInterno->cargarArchivos(CONTROLDATOS);
+$cargarInterno->cargarArchivos(CONTROLUBICACION);
+$cargarInterno->cargarArchivos(CONTROLUSUARIO);
+$cargarInterno->cargarArchivos(REGISTROPROPIEDAD);
+$cargarInterno->cargarArchivos(VENTAS);
 
 ?>
