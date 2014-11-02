@@ -81,70 +81,64 @@ class Usuario
             echo ' Bienvenido ' . $_SESSION["usuario"] . ' ' . $_SESSION["perfil"];
             echo '<a href="salir.php"> Cerrar Sesi&oacute;n </a> ';
         } else {
-            echo '<form class="navbar-form navbar-right" role="form">
-            <div class="form-group">';
             if (isset($_GET["errorusuario"]) && $_GET["errorusuario"] == "si") {
-                echo '<span style="color:#ed1337"><b>Datos incorrectos</b></span>';
+                echo '<a href="index.php"> Datos incorrectos </a> ';
             } else {
-                echo '<span class="Estilo2">Introduce tu clave de acceso </span>';
+                echo '<form class="navbar-form navbar-right" role="form">
+                        <div class="form-group">
+                            <input type="Usuario" placeholder="Usuario" class="form-control">
+                            <input type="Clave" placeholder="Clave" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">Ingresar</button>
+                      </form>';
             }
-            echo '
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>';
         }
     }
 
     public function generarMenu($perfil)
     {
-        echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+        echo '<div class="navbar-wrapper">
+                <div class="container">
+                    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="http://localhost/GESTEL/">GESTEL</a>
+                            </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.php">Inicio</a></li>
+			                    <li><a href="empresa.php">La Empresa</a></li>
+			                    <li><a href="propiedades.php">Propiedades</a></li>
+			                    <li><a href="contacto.php">Cont&aacute;ctenos</a></li>';
 
+        if ($perfil != 'Ninguno') {
+            echo '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu Usuario <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">';
 
-                <li><a href="index.php">Inicio</a></li>
-			    <li><a href="empresa.php">La Empresa</a></li>
-			    <li><a href="propiedades.php">Propiedades</a></li>
-			    <li><a href="contacto.php">Cont&aacute;ctenos</a></li>';
-
-        switch ($perfil) {
-            case "Administrador" :
-                echo '<li><a href="bien_admin.php">Configuraci&oacute;n</a></li>';
-                break;
-            case "Cliente-Proveedor":
-                echo '<li><a href="bien_clipro.php">Configuraci&oacute;n</a></li>
+            switch ($perfil) {
+                case "Administrador" :
+                    echo '<li><a href="bien_admin.php">Configuraci&oacute;n</a></li>';
+                    break;
+                case "Cliente-Proveedor":
+                    echo '<li><a href="bien_clipro.php">Configuraci&oacute;n</a></li>
                       <li><a href="cargar_propiedad.php">Cargar Propiedades</a></li>';
-                break;
+                    break;
+            }
+            echo '</ul>';
         }
-        echo '</ul>
-                </li>
-            </ul>';
+        echo '    </li>
+              </ul>';
         $this->imprimirSeccionLogin();
         echo '</div><!--/.navbar-collapse -->
       </div>
     </nav>
-
-<br><div id="logo"><h1><img src="images/logo.png" alt="24" width="166" height="151"></h1></div> <!-- div logo -->';
+    <br><div id="logo"><h1><img src="images/logo.png" alt="24" width="166" height="151"></h1></div> <!-- div logo -->';
 
     }
 }
