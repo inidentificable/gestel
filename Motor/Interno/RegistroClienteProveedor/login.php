@@ -5,7 +5,7 @@
 					}else{ 
 				?>
 					<form action="control.php" method="POST"> 
-					<table align="right" width="169" cellspacing="2" cellpadding="2" border="0" background="images/login.png" > 
+					<table align="right" width="169" cellspacing="2" cellpadding="2" border="0" bgcolor="#3CB1B6" > 
 						<tr> 
 							<td colspan="2" align="center" 
 							<?php if ($_GET["errorusuario"]=="si"){?> ><span style="color:#ed1337"><b>Datos incorrectos</b></span> 

@@ -1,17 +1,49 @@
-<?php include ("seguridad.php");?>
+<?php include ("seguridad.php");
+include("funciones/setup.php");
+
+conecta_base();
+
+if($id!="")
+{
+     $sql_busqueda="select * from cliente where id_clipro=".$id;
+	 
+	 $resultado_busqueda=mysql_query($sql_busqueda);
+	 $registros_busqueda=mysql_fetch_array($resultado_busqueda); 
+	 $fecha=fecha_es($registros_busqueda['fecha_clipro']);
+	 $hora=$registros_busqueda['hora'];
+}
+else
+{
+   $fecha=fecha_hoy();
+   $hora=hora();
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
 <link rel="shortcut icon" href="http:favicon.ico">
+
 	<style type="text/css">
 <!--
 .Estilo2 {font-weight: bold}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
 -->
     </style>
 <head>
 		<title>GESTEL</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link href="http://fonts.googleapis.com/css?family=Oswald:400,300" rel="stylesheet" type="text/css" />
@@ -26,7 +58,6 @@
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
 		<script language="javascript">
-
 			function validar()
 			{
 			   if(document.form1.frm_direinmue.value=="")
@@ -52,8 +83,7 @@
 				   alert("Debe Adjuntar Documentación");
 				   document.form1.userfile.focus();
 				  return;
-			   }
-				document.form1.accion.value = 'ingresar';   
+			   }   
 			   document.form1.submit();
 			}
 			
@@ -74,11 +104,12 @@
 		</br></br></br>
 			<div id="page">
 				<div class="container" align="center">
+				<div align="left"> Ud. se encuentra en: <a href="index.php">Inicio </a>&gt; <a href="#"> Cargar Propiedad </a></div><br>
 				
 	<p>&nbsp;</p>
 	<h2><strong>Cargar Propiedad    </strong></h2><br />
 	<p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ingrese su propiedad con los datos solicitados. <br />
-	  <form id="form1" action="" method="post" enctype="multipart/form-data">
+	  <form id="form1" action="ProcesaCargaPropiedad.php" method="post" enctype="multipart/form-data">
 			  <table width="54%" border="0" cellpadding="0" cellspacing="0" bordercolor="#111111" id="AutoNumber1" style="border-collapse: collapse">
 				<tr>
 				  <td colspan="2">&nbsp;</td>
@@ -90,31 +121,51 @@
 				  <td>&nbsp;</td>
 			    </tr>
 				<tr>
-				  <td><div align="left">Codigo Inmueble </div></td>
-				  <td><p>&nbsp;</p>
-					<p>
-					  <input type="text" name="cod_inmueble" size="17" />
-</p></td>
-				  <td></td>
+				  <td><div align="left">Id Inmueble : </div></td>
+				  <td><input name="frm_idinmueble" type="text" id="frm_idinmueble" size="17" disabled="disabled" value="<?php echo $registros['id_inmueble'];?>"/></td>
+				  <td>R.U.T. Propietario:
+				    <input name="frm_clirut" type="text" id="frm_clirut" size="20" disabled="disabled" value="<?php echo $registros_busqueda['rut_clipro'];?>"/></td>
 				</tr>
 				
 				</tr>
 				<tr>
-				  <td><div align="left">Direcci&oacute;n </div></td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+			    </tr>
+				<tr>
+				  <td><div align="left">Direcci&oacute;n : </div></td>
 				  <td><input type="text" name="frm_direinmue" size="17" /> </td>
-				  <td><strong>Valor en U.T.M</strong>. </td>
+				  <td><strong>Valor en U.T.M</strong>. (Unidad Tributaria Mensual): </td>
 				</tr>
 				<tr>
-				  <td>&nbsp;</td>
-				  <td>&nbsp;</td>
+				  <td>Ciudad:</td>
+				  <td><input type="text" name="frm_ciudad" size="17" /></td>
 				  <td><label>
 					<input type="text" name="valor" id="valor" />
 				  </label></td>
 				</tr>
 				<tr>
-				  <td>Descripci&oacute;n</td>
-				  <td rowspan="6"><textarea name="descripcion" cols="25" rows="7"></textarea></td>
 				  <td>&nbsp;</td>
+				  <td rowspan="9"><textarea name="descripcion" cols="25" rows="7"></textarea></td>
+				  <td>&nbsp;</td>
+			    </tr>
+				<tr>
+				  <td>País:
+			      <input type="text" name="frm_pais" size="17" /></td>
+				  <td>&nbsp;</td>
+			    </tr>
+				<tr>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+			    </tr>
+				<tr>
+				  <td>Descripci&oacute;n : </td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr>
+				  <td>&nbsp;</td>
+				  <td>Fecha : <input name="txt_fecha" type="text" id="txt_fecha" size="20" disabled="disabled" value="<?php echo $fecha;?>"/> </td>
 				</tr>
 				<tr>
 				  <td>&nbsp;</td>
@@ -122,11 +173,7 @@
 				</tr>
 				<tr>
 				  <td>&nbsp;</td>
-				  <td>&nbsp;</td>
-				</tr>
-				<tr>
-				  <td>&nbsp;</td>
-				  <td>&nbsp;</td>
+				  <td>Hora : <input name="txt_hora" type="text" id="txt_hora" size="20" disabled="disabled" value="<?php echo $hora;?>"/></td>
 				</tr>
 				<tr>
 				  <td>&nbsp;</td>
@@ -137,9 +184,9 @@
 				  <td>&nbsp;</td>
 				</tr>
 				<tr>
-				  <td>Buscar Imagen del Inmueble</td>
-				  <td><input name="userfile" type="file" class="cajatexto1" onchange="muestra();" size="16" style="float: left" />
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000" />				  </td></td>
+				  <td>Buscar Imagen del Inmueble : </td>
+				  <td><input name="userfile" type="file" class="cajatexto1"  size="16" style="float: left" />
+					<td><img src="images/ico16.png" alt="Cargue Imagen" width="170" height="61" class="cajatexto1" id="imagen" /></td>
 				</tr>
 				<tr>
 				  <td></td>
@@ -151,20 +198,17 @@
 					<?php }else{if ($_GET["errorpro"]=="no"){?>
 					bgcolor=#cccccc&gt;<span style="color:ffffff"><b>producto ingresado </b></span>
 					<?php }}?></td>
-				  <td><img src="images/ico16.png" alt="Cargue Imagen" width="203" height="91" class="cajatexto1" id="imagen" /></td>
-					
-				</tr>
-				<tr>
-				  <td>&nbsp;</td>
-				  <td>&nbsp;</td>
 				  <td>&nbsp;</td>
 				</tr>
 				<tr>
-				  <td><p align="center">
-				   
-				  </p></td>
-				  <td> <input name="grabar" type="submit" class="cajatexto1" value="Cargar Inmueble" style="font-weight: bold" />
-                    <input name="reset" type="reset" style="font-weight: bold" value="Cancelar" /></td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr>
+				  <td>
+				    <input type="submit" name="Submit" value="Cargar Inmueble"  style="font-weight: bold" />   </td>
+				  <td><input name="reset" type="reset" style="font-weight: bold" value="Cancelar" /></td>
 				</tr>
 				
 				<tr>

@@ -32,7 +32,10 @@
 		<div id="header-wrapper">
 			<div class="container">
 				<div id="header">
-					<?php include("menu.php"); ?>
+					<?php include("menu.php"); ?> 			
+				</div> <!--Div header -->
+				<div align="center">
+				<?php include("login.php"); ?>	
 				</div>
 			</div>
 		</div>

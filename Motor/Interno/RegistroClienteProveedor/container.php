@@ -1,4 +1,3 @@
-
 		<div id="featured-area">
 			<div class="container">
 				<div class="row divider">

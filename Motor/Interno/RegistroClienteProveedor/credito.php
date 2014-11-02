@@ -44,7 +44,7 @@
 							<div class="mobileUI-main-content" id="content">
 								<section>
 									<div class="post"><br><br>
-										<br><h2 align="center">Crédito Hipotecario</h2>
+										<br><h2 align="center"><strong>Crédito Hipotecario</strong></h2>
 										<p><img src="images/ico02.png"><br></p>
 										<h3 class="Estilo1">¿Qué es y cómo elegirlo?</h3><br>
 										<p align="justify">&nbsp;&nbsp;Un <strong>crédito hipotecario</strong> es un préstamo a mediano o largo plazo que te permitirá acceder a la compra de tu propiedad pagando a través de cuotas mensuales de forma segura. Para solicitarlo, te recomendamos simular alternativas y <strong>elegir el mejor crédito hipotecario</strong> según los factores que inciden en su costo final: intereses, comisiones, costo de los seguros y gastos operacionales.</p> <br>
