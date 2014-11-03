@@ -25,7 +25,13 @@ $gestionUsuario = new Usuario();
 <!-- Fixed navbar -->
 <?php $gestionUsuario->generarMenu(isset($_SESSION["perfil"]) ? $_SESSION["perfil"] : "Ninguno");
 $muestra->insertarSlide('prueba');
+?>
+<h1>TEST</h1>
+<?php
+include(GESTEL . "/dbtest.php");
+?>
+<h1>/TEST</h1>
+<?php
 include(GESTEL . "/container.php");
 include(GESTEL . "/footer.php"); ?>
 </body>
-</html>

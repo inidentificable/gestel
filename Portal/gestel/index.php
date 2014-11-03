@@ -18,8 +18,9 @@
 
 define("JS", RECURSOS . "/js");
 define("CSS", RECURSOS . "/css");
-define("LETRAS", RECURSOS . "/letras");
+define("LETRAS", RECURSOS . "/fonts");
 
+echo '<!DOCTYPE html>';
 echo '<html>';
 include_once(GESTEL . "/head.php");
 include_once(GESTEL . "/body.php");
