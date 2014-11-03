@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" uploadOnCheckin="9ee4d981-6f04-4692-b6b5-9eb66e17dc39">
-    <serverData>
-      <paths name="Claudio NTBK">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-    </serverData>
-    <option name="myUploadOnCheckinName" value="Claudio NTBK" />
+  <component name="PublishConfigData" uploadOnCheckin="93806d48-ad08-4dc0-85bb-3a1dfb59ec69">
+    <option name="myUploadOnCheckinName" value="localhost" />
   </component>
 </project>
 

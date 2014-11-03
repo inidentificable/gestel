@@ -18,20 +18,43 @@
  */
 class Conexion
 {
-    function conecta_base()
-    {
-        $link = mysql_connect( /*leer desde archivo*/);
-        if (!$link) {
-            die("No existe Conexion con el motor de Base de Datos" . mysql_error());
-        }
-        $base = mysql_select_db( /*leer desde archivo*/);
-        if (!$base) {
-            die("No se encuentra la Base de Datos" . mysql_error());
-        }
+    private $nombreServidor;
+    private $nombreUsuario;
+    private $clave;
+    private $nombreBD;
 
+    public function Conexion($servidor, $usuario, $clave, $bd)
+    {
+        $this->nombreServidor = $servidor;
+        $this->nombreUsuario = $usuario;
+        $this->clave = $clave;
+        $this->nombreBD = $bd;
+        Conexion::conectaBase();
     }
 
+    function interactuarBase($sql)
+    {
+        $nombreServidor = "localhost";
+        $nombreUsuario = "username";
+        $clave = "password";
+        $nombreBD = "myDB";
 
+        // Create connection
+        $conn = new mysqli($nombreServidor, $nombreUsuario, $clave, $nombreBD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        if ($conn->query($sql) === TRUE) {
+            $conn->close();
+            return true;
+        } else {
+            $conn->close();
+            return false;
+        }
+
+
+    }
 }
-
 ?>

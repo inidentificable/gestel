@@ -73,32 +73,32 @@ class Vista
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+          <img src="' . PROPIEDADES . '/pics01.jpg" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you re viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+              <h1>Tú casa soñada</h1>
+              <p>Somos una empresa seria y de prestigio</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Ingresa a nuestro sitio</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+          <img src="' . PROPIEDADES . '/pics02.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+              <h1>Lugares cómodos</h1>
+              <p>Las mejores propiedades de chile las encuentras aquí</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Pon tu propiedad a la venta</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+          <img src="' . PROPIEDADES . '/pics03.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+              <h1>Disfruta de tu vida</h1>
+              <p>Encontraras lo que estas buscando y al mejor precio</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Cotiza con nosotros</a></p>
             </div>
           </div>
         </div>
@@ -123,22 +123,22 @@ class Vista
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="' . MINIPROPIEDADES . '/ico01.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <h2>¿Cómo comprar una propiedad?</h2>
+          <p>Muchas personas creen que...</p>
+          <p><a class="btn btn-default" href="#" role="button">Ver más detalles &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="' . MINIPROPIEDADES . '/ico02.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <h2>Deseas arrendar o vender tu propiedad</h2>
+          <p>A la hora de concretar un negocio inmoviliario, es importante tener en cuenta...</p>
+          <p><a class="btn btn-default" href="#" role="button">Seguir leyendo los consejos inmobiliarios &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="' . MINIPROPIEDADES . '/ico03.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <h2>¿Cómo obtener el crédito hipotecario?</h2>
+          <p>Existen diversas instituciones financieras dispuestas a financiar la compra de una propiedad, a la hora de pedir un crédito debes pensar...</p>
+          <p><a class="btn btn-default" href="#" role="button">Visita la sección de financiamiento &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
@@ -149,11 +149,11 @@ class Vista
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It ll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">Av. El Santo <span class="text-muted">Vista a la bahía</span></h2>
+          <p class="lead">Ubicada en la ciudad de La Serena y a pasos del centro de la ciudad, el condominio Av. El Santo es la mejor opción para que vivas con tu familia a un paso de Colegios y Supermercados.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" src="' . MINIPROPIEDADES . '/ico04.png" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -161,11 +161,11 @@ class Vista
 
       <div class="row featurette">
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" src="' . MINIPROPIEDADES . '/ico05.png" alt="Generic placeholder image">
         </div>
         <div class="col-md-7">
-          <h2 class="featurette-heading">Oh yeah, it s that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">Casas Serena Oriente <span class="text-muted">El templo de la privacidad</span></h2>
+          <p class="lead">Excelente sector residencial, maravillosos parques y jardines adornan el entorno...</p>
         </div>
       </div>
 
@@ -173,11 +173,11 @@ class Vista
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">El Atardecer <span class="text-muted">De Peñuelas</span></h2>
+          <p class="lead">Un lugar tranquilo y a tu alcance, canchas de tenis, gimnasio y quincho...</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" src="' . MINIPROPIEDADES . '/ico06.png" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -188,8 +188,8 @@ class Vista
 
       <!-- FOOTER -->
       <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p class="pull-right"><a href="#">Volver arriba</a></p>
+        <p>&copy; 2014 GESTEL, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Terminos y condiciones</a></p>
       </footer>
 
     </div><!-- /.container -->';

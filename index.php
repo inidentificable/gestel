@@ -32,6 +32,7 @@ include_once(PORTAL . '/Ayudantes/Archivos.php');
 
 //Se incluyen los index de motor y portal para cargar el FRAMEWORK
 
+include_once(ARCHIVOS . "/index.php");
 include_once(MOTOR . "/index.php");
 include_once(PORTAL . "/index.php");
 

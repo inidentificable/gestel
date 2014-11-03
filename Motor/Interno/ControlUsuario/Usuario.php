@@ -138,8 +138,7 @@ class Usuario
         </div>
     </nav>
     </div>
-    </div>
-    <br><div id="logo"><h1><img src="images/logo.png" alt="24" width="166" height="151"></h1></div> <!-- div logo -->';
+    </div>';
 
     }
 }
