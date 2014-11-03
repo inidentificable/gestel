@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Claudio NTBK" uploadOnCheckin="9ee4d981-6f04-4692-b6b5-9eb66e17dc39">
+  <component name="PublishConfigData" uploadOnCheckin="9ee4d981-6f04-4692-b6b5-9eb66e17dc39">
     <serverData>
-      <paths name="Claudio NTBK">
+      <paths name="localhost">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />

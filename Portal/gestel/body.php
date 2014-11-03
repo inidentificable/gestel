@@ -23,7 +23,8 @@ $gestionUsuario = new Usuario();
 <body>
 
 <!-- Fixed navbar -->
-<?php $gestionUsuario->generarMenu(isset($_SESSION["perfil"]) ? $_SESSION["perfil"] : "Ninguno");
+<?php
+$gestionUsuario->generarMenu(isset($_SESSION["perfil"]) ? $_SESSION["perfil"] : "Ninguno");
 $muestra->insertarSlide('prueba');
 ?>
 <h1>TEST</h1>
@@ -32,6 +33,6 @@ include(GESTEL . "/dbtest.php");
 ?>
 <h1>/TEST</h1>
 <?php
-include(GESTEL . "/container.php");
+//include(GESTEL . "/container.php");
 include(GESTEL . "/footer.php"); ?>
 </body>
