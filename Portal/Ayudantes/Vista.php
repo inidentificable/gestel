@@ -27,10 +27,10 @@ class Vista
     public function listarCss()
     {
         $listadoCss = (array)$this->listados->listarArchivos($this->directorioCss);
-        echo '<!--  Seccion ingreso css -->';
+        echo "\n".'<!--  Seccion ingreso css -->'."\n\t";
         $x = 0;
         foreach ($listadoCss as $listando) {
-            echo '<link rel="stylesheet" type="text/css" href="' . $listadoCss[$x] . '" >';
+            echo '<link rel="stylesheet" type="text/css" href="' . $listadoCss[$x] . '" >'."\n\t";
             $x++;
         }
     }
@@ -38,21 +38,24 @@ class Vista
     public function listarJs()
     {
         $listadoJs = (array)$this->listados->listarArchivos($this->directorioJs);
-        echo '<!--  Seccion ingreso js -->';
+        echo "\n<!--  Seccion ingreso js -->\n\t";
         $x = 0;
+        echo '<script src="Portal/Recursos/js/jquery-1.11.1.min.js"></script>'."\n\t";
         foreach ($listadoJs as $listando) {
-            echo '<script src="' . $listadoJs[$x] . '"></script>';
+            if ($listadoJs[$x]!='Portal/Recursos/js/jquery-1.11.1.min.js'){
+            echo '<script src="' . $listadoJs[$x] . '"></script>'."\n\t";
             $x++;
+            }
         }
     }
 
     public function listarLetras()
     {
         $listadoLetras = (array)$this->listados->listarArchivos($this->directorioLetras);
-        echo '<!--  Seccion ingreso letras -->';
+        echo "\n".'<!--  Seccion ingreso letras -->'."\n\t";
         $x = 0;
         foreach ($listadoLetras as $listando) {
-            echo '<link href="' . $listadoLetras[$x] . '" rel="stylesheet" type="text/css">';
+            echo '<link href="' . $listadoLetras[$x] . '" rel="stylesheet" type="text/css">'."\n\t";
             $x++;
         }
     }
