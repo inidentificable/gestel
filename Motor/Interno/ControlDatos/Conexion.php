@@ -22,6 +22,9 @@ class Conexion
     private $nombreUsuario;
     private $clave;
     private $nombreBD;
+    private $consulta;
+    private $linea;
+    private $link;
 
     public function Conexion($servidor, $usuario, $clave, $bd)
     {
@@ -29,32 +32,42 @@ class Conexion
         $this->nombreUsuario = $usuario;
         $this->clave = $clave;
         $this->nombreBD = $bd;
-        Conexion::conectaBase();
     }
 
-    function interactuarBase($sql)
+    public function conectarBD()
     {
-        $nombreServidor = "localhost";
-        $nombreUsuario = "username";
-        $clave = "password";
-        $nombreBD = "myDB";
+        // Conectando, seleccionando la base de datos
+        $this->link = mysql_connect($this->nombreServidor, $this->nombreUsuario, $this->nombreUsuario) or die ('No se pudo conectar');
+        mysql_select_db('my_database') or die ('No se pudo seleccionar la base de datos');
+    }
 
-        // Create connection
-        $conn = new mysqli($nombreServidor, $nombreUsuario, $clave, $nombreBD);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+    function consultarBaseDatos($consulta)
+    {
+        $this->consulta = $consulta;
+
+        $this->conectarBD();
+
+        // Realizar una consulta MySQL
+        $this->resultado = mysql_query($this->consulta) or die('Consulta fallida');
+    }
+
+    public function imprimirTablaHtml()
+    {
+        // Imprimir los resultadoados en HTML
+        echo "<table>\n";
+        while ($this->linea = mysql_fetch_array($this->resultado, MYSQL_ASSOC)) {
+            echo "\t<tr>\n";
+            foreach ($this->linea as $col_value) {
+                echo "\t\t<td>$col_value</td>\n";
+            }
+            echo "\t</tr>\n";
         }
+        echo "</table>\n";
+        // Liberar resultadoados
+        mysql_free_result($this->resultado);
 
-        if ($conn->query($sql) === TRUE) {
-            $conn->close();
-            return true;
-        } else {
-            $conn->close();
-            return false;
-        }
-
-
+        // Cerrar la conexión
+        mysql_close($this->link);
     }
 }
 ?>

@@ -13,43 +13,10 @@
  *along with GESTEL.  If not, see <http://www.gnu.org/licenses/>.
  * Created by PhpStorm.
  * User: inidentificable
- * Date: 06-10-14
- * Time: 11:44 AM
+ * Date: 30-09-14
+ * Time: 10:51 PM
  */
-class Propiedad
+class UsuarioInterno
 {
-    public $idPropiedad;
-    public $rutPropietarioPropiedad;
-    public $librePrendaPropiedad;
-    public $recepcionMunicipalPropiedad;
-    public $documentacionPropiedad;
-    public $avaluoFiscalPropiedad;
-    public $rolAvaluoFiscalPropiedad;
-    public $numeroInscripcionBienesRaices;
-    public $comunaConservadorBienesRaices;
-    public $tasacion1Propiedad;
-    public $tasacion2Propiedad;
-    public $tasacion3Propiedad;
-    public $valorMinimoPropiedad;
-    public $valorMaximoPropiedad;
 
-    public function ingresarPropiedad()
-    {
-
-    }
-
-    public function eliminarPropiedad()
-    {
-
-    }
-
-    public function modificarPropiedad()
-    {
-
-    }
-
-    public function cambiarIdPropiedad()
-    {
-
-    }
-} 
+}

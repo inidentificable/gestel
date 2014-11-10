@@ -10,7 +10,6 @@ class Accion
 {
     public $que;
     public $aDonde;
-private conexion = new Conexion();
 
     public function gatillarEvento()
     {

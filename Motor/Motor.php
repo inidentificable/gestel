@@ -8,9 +8,27 @@
  */
 class Motor
 {
-    private $usuario = new Usuario();
-    private $modulo = new Modulo();
-    private $accion = new Accion();
+    public $quien;
+    public $que;
+    public $donde;
+    public $cuando;
+    public $porque;
+    public $como;
+
+    public function Motor()
+    {
+        $this->quien = new Usuario();
+        $this->que = new Accion();
+        $this->donde = new Modulo();
+        $this->cuando = new Tiempo();
+        $this->porque = new Argumento();
+        $this->como = new Funcion();
+    }
+
+    public function procesaPeticion()
+    {
+
+    }
 
 
 } 

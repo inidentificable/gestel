@@ -15,7 +15,7 @@
  * Date: 18-10-14
  * Time: 11:49 PM
  */
-include_once("Motor/Interno/ControlUsuario/Usuario.php");
+include_once("Motor/Interno/ControlUsuario/UsuarioInterno.php");
 $gestionUsuario = new Usuario();
 
 ?>
